@@ -1,8 +1,0 @@
-REQUIRED
-- can add items
-- can mark items as completed
-- can update items
-- lists have a name
-  - can update list name
-- list items have an order
-  - can update list  item order
