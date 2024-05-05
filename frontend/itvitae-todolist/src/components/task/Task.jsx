@@ -52,6 +52,7 @@ export default function Task({ todo, todos, setTodos }) {
                             autoFocus 
                         />
                     ) : (
+                      // if task is done, strikethrough text
                     <span className={todo.done ? 'completed item-name' : 'item-name'} onClick={handleEdit}>
                         {todo.name}
                     </span>

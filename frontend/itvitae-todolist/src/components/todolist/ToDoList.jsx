@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Task from '../task/Task';
+import Title from '../title/Title';
 import TodoForm from '../todoform/ToDoForm';
 import './ToDoList.css';
 import { Reorder } from "framer-motion"
@@ -10,7 +11,7 @@ export default function Boodschappenlijstje({}) {
 
     return (
         <div className="todo-list">
-            <h1>To Do</h1>
+            <Title />
             <TodoForm todos={todos} setTodos={setTodos} />
             
             <Reorder.Group axis="y" values={sortedTodos} onReorder={setTodos}>
