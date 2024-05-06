@@ -1,14 +1,14 @@
 package com.java55.itvitaetodolist.list;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.java55.itvitaetodolist.users.User;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -16,9 +16,8 @@ import java.time.LocalDateTime;
 @Setter
 public class ToDoList {
 
-    public ToDoList(String name, String users){
+    public ToDoList(String name){
         this.name = name;
-        this.users = users;
         enabled = true;
         created = LocalDateTime.now();
     }
@@ -31,7 +30,20 @@ public class ToDoList {
 
     private LocalDateTime created;
 
-    String users;
+    @ManyToMany
+    private Set<User> users;
 
     private boolean enabled;
+
+    public boolean hasUser(User user){
+        return users.contains(user);
+    }
+
+    public void addUser(User user){
+        users.add(user);
+    }
+
+    public void removeUser(User user){
+        users.remove(user);
+    }
 }

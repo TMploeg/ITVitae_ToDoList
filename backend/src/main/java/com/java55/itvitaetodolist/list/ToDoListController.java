@@ -1,7 +1,9 @@
 package com.java55.itvitaetodolist.list;
 
+import com.java55.itvitaetodolist.users.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -17,8 +19,10 @@ public class ToDoListController {
     private final ToDoListService toDoListService;
 
     @GetMapping
-    public List<ToDoList> getAll(){
-        return toDoListService.findAll();
+    public List<ToDoList> getAll(Authentication authentication){
+        var user = (User) authentication.getPrincipal();
+
+        return toDoListService.findByUsername(user.getUsername()).stream().toList();
     }
 
     @GetMapping("/{id}")
@@ -34,13 +38,13 @@ public class ToDoListController {
     public ResponseEntity<?> create(@RequestBody ToDoListCreationDto newList, UriComponentsBuilder ucb){
         String text = newList.name();
         if(text.isBlank()){
-            return ResponseEntity.badRequest().body("The title needs name");
+            return ResponseEntity.badRequest().body("The name needs text");
         }
-        var users = newList.users();
-        if(users.isEmpty()) {
-            return ResponseEntity.badRequest().body("a new list needs at least 1 user");
+        var user = newList.user();
+        if(user == null) {
+            return ResponseEntity.badRequest().body("a new list needs a user");
         }
-        var newToDoList = new ToDoList(text, users);
+        var newToDoList = new ToDoList(text);
         toDoListService.save(newToDoList);
 
         URI location = ucb.path("/lists/{id}").buildAndExpand(newToDoList.getId()).toUri();
@@ -63,11 +67,35 @@ public class ToDoListController {
         if(toDoListPatchDto.name() != null){
             originalToDoList.setName(toDoListPatchDto.name());
         }
-        if(toDoListPatchDto.users() != null){
-            originalToDoList.setUsers(toDoListPatchDto.users());
-        }
+
         toDoListService.save(originalToDoList);
 
         return ResponseEntity.ok(ToDoListDto.from(originalToDoList));
+    }
+
+    @PostMapping("{id}/{username}")
+    public ResponseEntity<ToDoListDto> addUser(@PathVariable Long id, @PathVariable String username){
+        var possibleList = toDoListService.findById(id);
+        if(possibleList.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        var list = possibleList.get();
+
+        toDoListService.addUser(list, username);
+
+        return ResponseEntity.ok(ToDoListDto.from(list));
+    }
+
+    @DeleteMapping("{id}/{username}")
+    public ResponseEntity<ToDoListDto> removeUser(@PathVariable Long id, @PathVariable String username){
+        var possibleList = toDoListService.findById(id);
+        if(possibleList.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        var list = possibleList.get();
+
+        toDoListService.removeUser(list, username);
+
+        return ResponseEntity.ok(ToDoListDto.from(list));
     }
 }

@@ -1,18 +1,14 @@
 package com.java55.itvitaetodolist.users;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.java55.itvitaetodolist.list.ToDoList;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity(name = "users")
 @NoArgsConstructor
@@ -26,6 +22,9 @@ public class User implements UserDetails {
     private String password;
 
     private String role;
+
+    @ManyToMany(mappedBy = "users")
+    private Set<ToDoList> lists;
 
     public User(String username, String password, String role) {
         this.username = username;
