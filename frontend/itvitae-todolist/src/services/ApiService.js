@@ -12,6 +12,20 @@ export default class ApiService {
         return this.#doHttpRequest('POST', url, params, body);
     }
 
+    static put(url, body, params) {
+        return this.#doHttpRequest('PUT', url, params, body);
+    }
+
+    static patch(url, body, params) {
+        return this.#doHttpRequest('PATCH', url, params, body);
+    }
+
+    static delete(url, params) {
+        return this.#doHttpRequest('DELETE', url, params);
+    }
+
+    //ApiService.[method]().then(succes -> {}, failed -> {})
+
     static #doHttpRequest(method, url, params, body) {
         return new Promise((onSucces, onFailed) => {
             const request = new XMLHttpRequest();
