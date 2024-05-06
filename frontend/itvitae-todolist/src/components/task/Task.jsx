@@ -3,18 +3,28 @@ import './Task.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faSquareXmark} from '@fortawesome/free-solid-svg-icons';
+import ApiService from "../../services/ApiService";
 
-export default function Task({ todo, todos, setTodos }) {
+export default function Task({ todo, todos, setTodos, listID }) {
     const [editedText, setEditedText] = useState(todo.name);
     const [isEditing, setIsEditing] = useState(false);
 
     function handleDelete(todo) {
+        ApiService.delete("items/" + todo.id);
         const updatedTodos = todos.filter((item) => item !== todo); 
         setTodos(updatedTodos);
     }
 
-    function handleCheckOff(name) {
-        const newArray = todos.map((todo) => todo.name === name ? {...todo,done:!todo.done} : todo);
+    function handleCheckOff(id) {
+        const newArray = todos.map((todo) => { 
+            if (todo.id !== id) return todo;
+            
+            let checked = !todo.done;
+
+            ApiService.patch("items/" + todo.id, {completed: checked});
+
+            return {...todo,done: checked};
+        });
         setTodos(newArray);
     }
 
@@ -27,8 +37,15 @@ export default function Task({ todo, todos, setTodos }) {
     }
 
     function handleSave() {
-        const updatedTodos = todos.map(item =>
-            item === todo ? { ...item, name: editedText } : item
+        const updatedTodos = todos.map(item => {
+                if (item !== todo) return todo;
+                
+                let text = todo.name;
+
+                ApiService.patch("items/" + todo.id, {text: text});
+
+                return {...todo,name: checked};
+            }
         );
         setTodos(updatedTodos);
         setIsEditing(false);
@@ -38,7 +55,7 @@ export default function Task({ todo, todos, setTodos }) {
         <div className="task">
             <div className="checkbox-and-text">
                 <span>
-                    <input type="checkbox" className="check-off-box" checked={todo.done} onChange={() => handleCheckOff(todo.name)} />
+                    <input type="checkbox" className="check-off-box" checked={todo.done} onChange={() => handleCheckOff(todo.id)} />
                 </span>
                 <span>
                     {isEditing ? (

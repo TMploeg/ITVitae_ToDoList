@@ -1,7 +1,7 @@
 .todo-list {
     display: flex;
     flex-direction: column;
-    background-color: #05a8bf;;
+    background-color: #05a8bf;
     padding: 20px 20px 0 20px;
     margin-top: 20px;
     border-radius: 5px;

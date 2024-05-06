@@ -2,19 +2,23 @@ import { useState } from "react";
 import "./ToDoForm.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faPlus} from '@fortawesome/free-solid-svg-icons';
+import ApiService from "../../services/ApiService";
 
-export default function ToDoForm({ todos, setTodos }) {
-    const [todo, setTodo] = useState({name: "", done: false});
+export default function ToDoForm({ todos, setTodos, listID }) {
+    const [todo, setTodo] = useState({name: "", done: false, order: todos.length, id: 0});
     
     function handleInputChange(event) {
         setTodo({ name: event.target.value, done: false });
     }
 
     function handleAdd() {
-        if (todo.name.length > 0) {
-            setTodos([...todos, todo]);
-            setTodo({name: "", done: false});
+        if (todo.name.length <= 0) {
+            return;
         }
+
+        ApiService.post("items", todo).then((todo) => {setTodos([...todos, todo])});
+        // empties input 
+        setTodo({name: "", done: false, order: todos.length});
     }
 
     return (
