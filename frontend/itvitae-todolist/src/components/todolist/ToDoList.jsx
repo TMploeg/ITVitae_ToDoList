@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import Task from '../task/Task';
-import Title from '../title/Title';
-import TodoForm from '../todoform/ToDoForm';
+import React, { useState, useEffect } from 'react';
+import Task from './task/Task';
+import Title from './title/Title';
+import TodoForm from './todoform/ToDoForm';
 import './ToDoList.css';
 import { Reorder } from "framer-motion"
 import { useParams } from 'react-router-dom';
@@ -20,6 +20,20 @@ export default function Boodschappenlijstje({}) {
 
         setTodos(newTodos);
     }
+
+    useEffect(() => {
+        ApiService.get("lists/" + id).then((list) => {
+            let newTodos = list.items.map((todo) => {
+                return {
+                    id: todo.id,
+                    name: todo.text,
+                    done: todo.completed,
+                    order: todo.order
+                }
+            })
+            setTodos(newTodos);
+        })
+    })
 
     return (
         <div className="todo-list">

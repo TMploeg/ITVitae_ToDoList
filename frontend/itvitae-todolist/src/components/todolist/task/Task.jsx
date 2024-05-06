@@ -3,7 +3,7 @@ import './Task.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faSquareXmark} from '@fortawesome/free-solid-svg-icons';
-import ApiService from "../../services/ApiService";
+import ApiService from "../../../services/ApiService";
 
 export default function Task({ todo, todos, setTodos, listID }) {
     const [editedText, setEditedText] = useState(todo.name);

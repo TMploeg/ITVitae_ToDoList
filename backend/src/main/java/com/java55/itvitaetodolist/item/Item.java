@@ -15,7 +15,6 @@ public class Item {
     private Long itemId;
 
     @ManyToOne
-    @JoinColumn (name="todolist_id")
     private ToDoList list;
     private String text;
     private int order;
