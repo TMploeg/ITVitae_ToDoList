@@ -1,5 +1,5 @@
 import './App.css'
-
+import ToDoList from './components/todolist/ToDoList';
 import { Routes, Route, Navigate, useNavigate, useParams } from "react-router-dom";
 
 function App() {
@@ -24,10 +24,10 @@ function App() {
         <Route path="/login" element={<p>Login</p>} />
         <Route path="/register" element={<p>Register</p>} />
         <Route path="/lists" element={<p>Lists</p>} />
-        <Route path="/lists/:id" element={<p>List</p>} />
+        <Route path="/lists/:id" element={<div className='todo-container'><ToDoList /></div>} />
       </Routes>
     </>
   )
 }
 
-export default App
+export default App;
