@@ -1,0 +1,9 @@
+.row{
+    height: auto;
+    min-height: 30px;
+    width: 80%;
+    min-width: 50px;
+    border-radius: 10%;
+    background-color: blue;
+    text-align: center;
+}

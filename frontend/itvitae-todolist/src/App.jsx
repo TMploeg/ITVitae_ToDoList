@@ -23,7 +23,7 @@ function App() {
         <Route path="/" element={<Navigate to="/lists" />} />
         <Route path="/login" element={<p>Login</p>} />
         <Route path="/register" element={<p>Register</p>} />
-        <Route path="/lists" element={<p>Lists</p>} />
+        <Route path="/lists" element={<Lists />} />
         <Route path="/lists/:id" element={<div className='todo-container'><ToDoList /></div>} />
       </Routes>
     </>
