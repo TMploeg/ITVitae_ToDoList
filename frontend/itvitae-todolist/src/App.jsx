@@ -1,9 +1,10 @@
-import './App.css'
+import Lists from './pages/Lists';
+import './App.css';
 
 function App() {
   return (
     <>
-      Hello, World!
+      <Lists />
     </>
   )
 }
