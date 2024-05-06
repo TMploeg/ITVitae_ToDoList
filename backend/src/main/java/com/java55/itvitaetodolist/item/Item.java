@@ -1,12 +1,11 @@
 package com.java55.itvitaetodolist.item;
 
+import com.java55.itvitaetodolist.list.ToDoList;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
 @NoArgsConstructor
-@RequiredArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 public class Item {
@@ -17,6 +16,7 @@ public class Item {
     @ManyToOne
     private ToDoList list;
     private String text;
+    @Column(name = "item_order")
     private int order;
     private boolean completed = false;
     private boolean enabled = true;

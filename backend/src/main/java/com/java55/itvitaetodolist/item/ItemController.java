@@ -1,6 +1,8 @@
 package com.java55.itvitaetodolist.item;
 
 import com.java55.itvitaetodolist.exceptions.NotFoundException;
+import com.java55.itvitaetodolist.list.ToDoList;
+import com.java55.itvitaetodolist.list.ToDoListRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,18 +10,19 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.java55.itvitaetodolist.exceptions.BadRequestException;
 
 import java.net.URI;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/items")
 public class ItemController {
     private final ItemRepository itemRepository;
+    private final ToDoListRepository toDoListRepository;
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<Item> addItem(@RequestBody PostItemDto postItemDto, UriComponentsBuilder ucb) {
-        if (postItemDto.listId()); // to do: check of list bestaat
-        var possiblyExistingList = toDoListRepository.findById(postItemDto.listId();
-        if (list.isEmpty()) {
+        Optional<ToDoList> possiblyExistingList = toDoListRepository.findById(postItemDto.listId());
+        if (possiblyExistingList.isEmpty()) {
             throw new NotFoundException();
         }
         ToDoList list = possiblyExistingList.get();
