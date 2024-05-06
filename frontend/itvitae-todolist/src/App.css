@@ -4,6 +4,23 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.toolbar {
+  width: 100%;
+  background-color: darkcyan;
+  display: flex;
+  padding: 10px;
+}
+
+.nav-bar-item {
+  cursor: pointer;
+  user-select: none;
+  padding: 10px;
+}
+
+.nav-bar-item:not(:first-child){
+  border-left: 2px solid rgb(77, 77, 77);
+}
+
 
 body {
   background-color: white;
