@@ -1,6 +1,5 @@
-package com.java55.itvitaetodolist.repositories;
+package com.java55.itvitaetodolist.users;
 
-import com.java55.itvitaetodolist.models.User;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

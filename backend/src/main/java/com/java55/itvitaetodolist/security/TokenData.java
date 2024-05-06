@@ -1,4 +1,4 @@
-package com.java55.itvitaetodolist.other;
+package com.java55.itvitaetodolist.security;
 
 import java.util.Date;
 

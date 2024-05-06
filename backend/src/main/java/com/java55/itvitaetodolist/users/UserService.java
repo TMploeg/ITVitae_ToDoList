@@ -1,13 +1,10 @@
-package com.java55.itvitaetodolist.services;
+package com.java55.itvitaetodolist.users;
 
-import com.java55.itvitaetodolist.models.User;
-import com.java55.itvitaetodolist.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
 import java.util.regex.Pattern;
 
 @Service

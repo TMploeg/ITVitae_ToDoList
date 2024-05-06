@@ -1,4 +1,4 @@
-package com.java55.itvitaetodolist.models;
+package com.java55.itvitaetodolist.users;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,7 +1,7 @@
 package com.java55.itvitaetodolist;
 
-import com.java55.itvitaetodolist.dtos.AuthDTO;
-import com.java55.itvitaetodolist.dtos.TokenDTO;
+import com.java55.itvitaetodolist.security.AuthDTO;
+import com.java55.itvitaetodolist.security.TokenDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

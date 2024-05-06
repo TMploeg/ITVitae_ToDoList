@@ -1,8 +1,7 @@
-package com.java55.itvitaetodolist.services;
+package com.java55.itvitaetodolist.security;
 
-import com.java55.itvitaetodolist.models.User;
-import com.java55.itvitaetodolist.other.TokenData;
-import com.java55.itvitaetodolist.repositories.UserRepository;
+import com.java55.itvitaetodolist.users.User;
+import com.java55.itvitaetodolist.users.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
