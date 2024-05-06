@@ -21,7 +21,7 @@ export default function Title({}) {
         <span>
             {isEditing ? (
                 <input
-                    className="edit-input" 
+                    className="edit-title" 
                     type="text"
                     value={editedText}
                     onChange={handleInputChange}
