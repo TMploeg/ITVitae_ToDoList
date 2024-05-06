@@ -1,5 +1,6 @@
 package com.java55.itvitaetodolist.list;
 
+import com.java55.itvitaetodolist.item.Item;
 import com.java55.itvitaetodolist.users.User;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -18,7 +19,6 @@ public class ToDoList {
 
     public ToDoList(String name){
         this.name = name;
-        enabled = true;
         created = LocalDateTime.now();
     }
 
@@ -33,7 +33,10 @@ public class ToDoList {
     @ManyToMany
     private Set<User> users;
 
-    private boolean enabled;
+    @OneToMany(mappedBy = "list")
+    private Set<Item> items;
+
+    private boolean enabled = true;
 
     public boolean hasUser(User user){
         return users.contains(user);

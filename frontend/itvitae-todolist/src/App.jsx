@@ -1,5 +1,6 @@
 import './App.css'
 import ToDoList from './components/todolist/ToDoList';
+import Lists from './pages/Lists';
 import { Routes, Route, Navigate, useNavigate, useParams } from "react-router-dom";
 
 function App() {
