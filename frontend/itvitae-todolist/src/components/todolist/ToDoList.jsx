@@ -33,7 +33,7 @@ export default function Boodschappenlijstje({}) {
             })
             setTodos(newTodos);
         })
-    })
+    }, []);
 
     return (
         <div className="todo-list">
