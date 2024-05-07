@@ -21,10 +21,10 @@ public class ToDoListController {
     private final ToDoListService toDoListService;
 
     @GetMapping
-    public List<ToDoListDto> getAll(Authentication authentication){
+    public List<ToDoListMinimalDto> getAll(Authentication authentication){
         var user = (User) authentication.getPrincipal();
 
-        return toDoListService.findByUsername(user.getUsername()).stream().map(ToDoListDto::from).toList();
+        return toDoListService.findByUsername(user.getUsername()).stream().map(ToDoListMinimalDto::from).toList();
     }
 
     @GetMapping("/{id}")

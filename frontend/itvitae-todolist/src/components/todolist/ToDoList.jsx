@@ -25,7 +25,6 @@ export default function ToDoList({ }) {
 
     useEffect(() => {
         ApiService.get("lists/" + id).then((response) => {
-            console.log('RESPONSE', response);
             if (response.body.name !== null) {
                 setTitle(response.body.name);
             }
