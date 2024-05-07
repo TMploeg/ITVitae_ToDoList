@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import './Title.css';
 
-export default function Title({}) {
-    const [editedText, setEditedText] = useState("");
+export default function Title({ title }) {
+    const [editedText, setEditedText] = useState(title);
     const [isEditing, setIsEditing] = useState(false);
 
     function handleEdit() {
@@ -30,7 +30,7 @@ export default function Title({}) {
                     autoFocus 
                     />
                 ) : (
-                        <h1 onClick={handleEdit}>{editedText || "To Do"}</h1>
+                        <h1 onClick={handleEdit}>{editedText}</h1>
                     )}
         </span>
     );
