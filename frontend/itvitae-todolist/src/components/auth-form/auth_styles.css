@@ -3,6 +3,10 @@
     margin-left: 20px;
 }
 
+.form-title{
+    color: black;
+}
+
 .auth-form{
     display: flex;
     flex-direction: column;

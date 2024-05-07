@@ -13,7 +13,7 @@ export default function AuthForm({ title, username, onUsernameChanged, password,
 
 
     return <div className="form-container">
-        {title ? <h1>{title}</h1> : null}
+        {title ? <h1 className="form-title">{title}</h1> : null}
         <form className="auth-form">
             <div className="form-field">
                 <input
