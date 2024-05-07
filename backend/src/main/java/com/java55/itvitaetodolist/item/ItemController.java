@@ -15,6 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/items")
+@CrossOrigin(origins = "${itvitae-todolist.cors}")
 public class ItemController {
     private final ItemRepository itemRepository;
     private final ToDoListRepository toDoListRepository;
@@ -48,7 +49,7 @@ public class ItemController {
         Item item = possiblyExistingItem.get();
 
         if (patchItemDto.completed() != null) {
-            item.setCompleted(true);
+            item.setCompleted(patchItemDto.completed());
         }
         if (patchItemDto.order() != null) {
             item.setOrder(patchItemDto.order());

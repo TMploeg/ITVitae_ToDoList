@@ -38,14 +38,12 @@ export default function Task({ todo, todos, setTodos, listID }) {
 
     function handleSave() {
         const updatedTodos = todos.map(item => {
-                if (item !== todo) return todo;
-                
-                let text = todo.name;
+            if (item !== todo) return item;
 
-                ApiService.patch("items/" + todo.id, {text: text});
+            ApiService.patch("items/" + todo.id, { text: editedText });
 
-                return {...todo,name: checked};
-            }
+            return { ...todo, name: editedText };
+        }
         );
         setTodos(updatedTodos);
         setIsEditing(false);
