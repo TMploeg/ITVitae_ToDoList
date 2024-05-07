@@ -17,20 +17,12 @@ function App() {
         </div>
         {getAuthToolbarElement()}
       </div>
-
-      <Routes>
-        <Route path="/" element={<Navigate to="/lists" />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/lists" element={<Lists />} />
-        <Route path="/lists/:id" element={<div className='todo-container'><ToDoList /></div>} />
-      </Routes>
+      {getRoutes()}
     </>
   )
 
   function getAuthToolbarElement() {
-    console.log(UserService.isLoggedIn());
-    const element = UserService.isLoggedIn()
+    return UserService.isLoggedIn()
       ?
       <div className='nav-bar-item' onClick={onLogout}>
         <h1>Logout</h1>
@@ -43,9 +35,27 @@ function App() {
           <h1>Register</h1>
         </div>
       </>;
-
-    return element;
   }
+
+  function getRoutes() {
+    return <Routes>
+      {
+        UserService.isLoggedIn()
+          ? <>
+            <Route path="/" element={<Navigate to="/lists" />} />
+            <Route path="/lists" element={<Lists />} />
+            <Route path="/lists/:id" element={<div className='todo-container'><ToDoList /></div>} />
+          </>
+          : <>
+            <Route path="/" element={<Navigate to="/login" />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </>
+      }
+      <Route path="*" element={<Navigate to="/" />} />
+    </Routes>
+  }
+
   function onLogout() {
     UserService.logout();
     navigate('/login');
