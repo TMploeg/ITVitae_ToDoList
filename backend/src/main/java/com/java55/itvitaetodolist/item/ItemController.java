@@ -21,6 +21,7 @@ public class ItemController {
 
     @PostMapping
     public ResponseEntity<Item> addItem(@RequestBody PostItemDto postItemDto, UriComponentsBuilder ucb) {
+        if (postItemDto.listId() == null) throw new BadRequestException("ListId is required!");
         Optional<ToDoList> possiblyExistingList = toDoListRepository.findById(postItemDto.listId());
         if (possiblyExistingList.isEmpty()) {
             throw new NotFoundException();
@@ -48,7 +49,7 @@ public class ItemController {
         Item item = possiblyExistingItem.get();
 
         if (patchItemDto.completed() != null) {
-            item.setCompleted(true);
+            item.setCompleted(patchItemDto.completed());
         }
         if (patchItemDto.order() != null) {
             item.setOrder(patchItemDto.order());
