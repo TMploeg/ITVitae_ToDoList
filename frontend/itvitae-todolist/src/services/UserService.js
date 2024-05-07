@@ -24,6 +24,10 @@ export default class UserService {
             );
     }
 
+    static logout() {
+        sessionStorage.removeItem(TOKEN_STORAGE_LOCATION);
+    }
+
     static register(username, password) {
         return ApiService
             .post(
@@ -46,5 +50,9 @@ export default class UserService {
                     })
                 }
             );
+    }
+
+    static isLoggedIn() {
+        return sessionStorage.getItem(TOKEN_STORAGE_LOCATION) !== null;
     }
 }
