@@ -11,7 +11,11 @@ export default function Task({ todo, todos, setTodos, listID }) {
 
     function handleDelete(todo) {
         ApiService.delete("items/" + todo.id);
-        const updatedTodos = todos.filter((item) => item !== todo); 
+        const updatedTodos = todos.filter((item) => item !== todo);
+        updatedTodos.forEach((item) => {
+            if (item.order > todo.order) item.order--;
+            ApiService.patch("items/" + item.id, item);
+        });
         setTodos(updatedTodos);
     }
 

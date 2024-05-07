@@ -2,7 +2,7 @@ package com.java55.itvitaetodolist.item;
 
 import com.java55.itvitaetodolist.exceptions.NotFoundException;
 import com.java55.itvitaetodolist.list.ToDoList;
-import com.java55.itvitaetodolist.list.ToDoListRepository;
+import com.java55.itvitaetodolist.list.ToDoListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +18,12 @@ import java.util.Optional;
 @CrossOrigin(origins = "${itvitae-todolist.cors}")
 public class ItemController {
     private final ItemRepository itemRepository;
-    private final ToDoListRepository toDoListRepository;
+    private final ToDoListService toDoListService;
 
     @PostMapping
-    public ResponseEntity<Item> addItem(@RequestBody PostItemDto postItemDto, UriComponentsBuilder ucb) {
+    public ResponseEntity<ItemDto> addItem(@RequestBody PostItemDto postItemDto, UriComponentsBuilder ucb) {
         if (postItemDto.listId() == null) throw new BadRequestException("ListId is required!");
-        Optional<ToDoList> possiblyExistingList = toDoListRepository.findById(postItemDto.listId());
+        Optional<ToDoList> possiblyExistingList = toDoListService.findById(postItemDto.listId());
         if (possiblyExistingList.isEmpty()) {
             throw new NotFoundException();
         }
@@ -38,7 +38,7 @@ public class ItemController {
 
         Item newItem = itemRepository.save(new Item(list, postItemDto.text(), postItemDto.order()));
         URI locationOfNewItem = ucb.path("items/{id}").buildAndExpand(newItem.getItemId()).toUri();
-        return ResponseEntity.created(locationOfNewItem).body(newItem);
+        return ResponseEntity.created(locationOfNewItem).body(ItemDto.from(newItem));
     }
 
     @PatchMapping("/{id}")
