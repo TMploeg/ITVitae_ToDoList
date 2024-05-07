@@ -4,8 +4,7 @@ import './Title.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ApiService from "../../../services/ApiService";
 
-export default function Title({ title, listID }) {
-    const [editedText, setEditedText] = useState(title);
+export default function Title({ title, listID, setTitle }) {
     const [isEditing, setIsEditing] = useState(false);
 
     function handleEdit() {
@@ -13,12 +12,12 @@ export default function Title({ title, listID }) {
     }
 
     function handleInputChange(event) {
-        setEditedText(event.target.value);
+        setTitle(event.target.value);
     }
 
     function handleSave() {
         setIsEditing(false);
-        ApiService.patch("lists/" + listID, {name: editedText});
+        ApiService.patch("lists/" + listID, {name: title});
     }
 
     return (
@@ -27,16 +26,17 @@ export default function Title({ title, listID }) {
                 <input
                     className="edit-title" 
                     type="text"
-                    value={editedText}
+                    value={title}
                     onChange={handleInputChange}
                     onBlur={handleSave}
+                    onKeyDown={e => e.key === `Enter`? handleSave() : ''}
                     spellCheck="false"
                     autoFocus 
                     />
                 ) : (
                     <span className="title-container">
-                        <h1 onClick={handleEdit}>{editedText || "To Do"}</h1>
-                        <FontAwesomeIcon icon={faPen} className="edit-icon" onClick={handleEdit} />
+                        <h1>{title}</h1>
+                        <FontAwesomeIcon icon={faPen} className="edit-icon" onClick={(e) => {e.stopPropagation(); handleEdit();}} />
                     </span>
                     )}
         </span>

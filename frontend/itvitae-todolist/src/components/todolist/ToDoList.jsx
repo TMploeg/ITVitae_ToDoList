@@ -7,7 +7,7 @@ import Task from './task/Task';
 import Title from './title/Title';
 import TodoForm from './todoform/ToDoForm';
 
-export default function ToDoList({ }) {
+export default function ToDoList() {
     const { id } = useParams();
     const [todos, setTodos] = useState([]);
     const [title, setTitle] = useState("To Do");
@@ -42,7 +42,7 @@ export default function ToDoList({ }) {
 
     return (
         <div className="todo-list">
-            <Title title={title} listID={id} />
+            <Title title={title} listID={id} setTitle={setTitle} />
             <TodoForm todos={todos} setTodos={setTodos} listID={id} />
 
             <Reorder.Group axis="y" values={sortedTodos} onReorder={handleReorder}>

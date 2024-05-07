@@ -67,6 +67,7 @@ export default function Task({ todo, todos, setTodos, listID }) {
                             value={editedText}
                             onChange={handleInputChange}
                             onBlur={handleSave}
+                            onKeyDown={e => e.key === `Enter`? handleSave() : ''}
                             spellCheck="false"
                             autoFocus 
                         />

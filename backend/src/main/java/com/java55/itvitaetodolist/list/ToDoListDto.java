@@ -15,7 +15,8 @@ public record ToDoListDto(String name, LocalDateTime created, Long id, List<User
         var created = toDoList.getCreated();
         var id = toDoList.getId();
         var users = toDoList.getUsers().stream().map(UserDto::from).toList();
-        var items = toDoList.getItems().stream().map(ItemDto::from).toList();
+        var itemsList = toDoList.getItems();
+        var items = itemsList == null? null : itemsList.stream().map(ItemDto::from).toList();
         return new ToDoListDto(text, created, id, users, items);
     }
 }
