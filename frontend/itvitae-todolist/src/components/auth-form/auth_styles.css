@@ -2,3 +2,18 @@
     margin-top: 20px;
     margin-left: 20px;
 }
+
+.auth-form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-field-error{
+    margin-top: 5px;
+    color: red;
+}
+
+.form-button{
+    width: fit-content;
+}

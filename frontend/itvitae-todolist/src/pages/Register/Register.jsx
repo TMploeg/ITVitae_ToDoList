@@ -15,7 +15,8 @@ export default function Register() {
             onUsernameChanged={setUsername}
             password={password}
             onPasswordChanged={setPassword}
-            onSubmit={submit} />
+            onSubmit={submit}
+            validatePassword />
     </div>
 
     function submit() {
