@@ -13,7 +13,8 @@ export default function ToDoList({ }) {
     const sortedTodos = todos.slice().sort((a, b) => Number(a.order) - Number(b.order));
 
     function handleReorder(newTodos) {
-        newTodos.array.forEach((todo, index) => {
+        console.log(newTodos);
+        newTodos.forEach((todo, index) => {
             todo.order = index;
             ApiService.patch("items/" + todo.id, todo);
         });
