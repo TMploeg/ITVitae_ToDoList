@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("lists")
-@CrossOrigin
+@CrossOrigin(origins = "${itvitae-todolist.cors}")
 public class ToDoListController {
 
     private final ToDoListService toDoListService;
