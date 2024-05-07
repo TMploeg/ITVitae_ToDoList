@@ -19,5 +19,30 @@ h1 {
     margin-top: 0;
     margin-bottom: 20px;
     font-size: 30px;
+    max-width: 340px;
     align-self: flex-start;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+
+.title-container {
+    display: flex;
+    align-items: center;
+    cursor: text;
+    overflow: hidden; 
+}
+
+.edit-icon {
+    margin-left: 10px;
+    margin-bottom: 20px;
+    visibility: hidden; 
+    color: white;
+}
+
+
+.title-container:hover .edit-icon {
+    visibility: visible; 
+}
+

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 import './Title.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ApiService from "../../../services/ApiService";
 
-export default function Title({ title }) {
+export default function Title({ title, listID }) {
     const [editedText, setEditedText] = useState(title);
     const [isEditing, setIsEditing] = useState(false);
 
@@ -15,6 +18,7 @@ export default function Title({ title }) {
 
     function handleSave() {
         setIsEditing(false);
+        ApiService.patch("lists/" + listID, {name: editedText});
     }
 
     return (
@@ -30,7 +34,10 @@ export default function Title({ title }) {
                     autoFocus 
                     />
                 ) : (
-                        <h1 onClick={handleEdit}>{editedText}</h1>
+                    <span className="title-container">
+                        <h1 onClick={handleEdit}>{editedText || "To Do"}</h1>
+                        <FontAwesomeIcon icon={faPen} className="edit-icon" onClick={handleEdit} />
+                    </span>
                     )}
         </span>
     );

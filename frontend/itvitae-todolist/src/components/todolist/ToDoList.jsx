@@ -43,7 +43,7 @@ export default function ToDoList({ }) {
 
     return (
         <div className="todo-list">
-            <Title title={title} />
+            <Title title={title} listID={id} />
             <TodoForm todos={todos} setTodos={setTodos} listID={id} />
 
             <Reorder.Group axis="y" values={sortedTodos} onReorder={handleReorder}>
