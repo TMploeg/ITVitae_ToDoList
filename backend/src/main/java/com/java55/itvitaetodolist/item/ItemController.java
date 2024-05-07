@@ -71,6 +71,7 @@ public class ItemController {
         }
         Item item = optionalItem.get();
         item.setEnabled(false);
+        itemRepository.save(item);
         return ResponseEntity.noContent().build();
     }
 }
