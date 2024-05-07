@@ -25,9 +25,9 @@ public class Seeder implements CommandLineRunner {
 
     @Override
     public void run(String[] args){
-        User testUser;
-        if (!userService.userExists("test")) testUser = userService.save("test", "test");
-        else testUser = userService.loadUserByUsername("test");
+        User testUser = userService.userExists("test") ?
+                userService.loadUserByUsername("test") :
+                userService.save("test", "test");
 
         System.out.println(jwtService.generateTokenForUser("test"));
 
