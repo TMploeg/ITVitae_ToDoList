@@ -37,15 +37,13 @@ public class ToDoListController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody ToDoListCreationDto newList, UriComponentsBuilder ucb){
+    public ResponseEntity<?> create(@RequestBody ToDoListCreationDto newList, UriComponentsBuilder ucb, Authentication authentication){
         String text = newList.name();
         if(text.isBlank()){
             throw new BadRequestException("The name needs text");
         }
-        var user = newList.user();
-        if(user == null) {
-            throw new BadRequestException("A new list needs a user");
-        }
+        var user = (User) authentication.getPrincipal();
+
         var newToDoList = new ToDoList(text, user);
         toDoListService.save(newToDoList);
 
@@ -54,13 +52,13 @@ public class ToDoListController {
     }
 
     @PatchMapping("{id}")
-    public ResponseEntity<?> update(@RequestBody ToDoListPatchDto toDoListPatchDto){
+    public ResponseEntity<?> update(@RequestBody ToDoListPatchDto toDoListPatchDto, @PathVariable Long id){
         var idFromBody = toDoListPatchDto.id();
-        if(idFromBody == null){
-            throw new BadRequestException("PATCH needs id in body");
+        if(idFromBody != null){
+            throw new BadRequestException("PATCH should not have id in body");
         }
 
-        var possibleOriginal = toDoListService.findById(idFromBody);
+        var possibleOriginal = toDoListService.findById(id);
         if(possibleOriginal.isEmpty()){
             throw new NotFoundException();
         }
