@@ -4,6 +4,7 @@ import ToDoList from './components/todolist/ToDoList';
 import Lists from './pages/Lists';
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import UserService from "./services/UserService";
 
 function App() {
   const navigate = useNavigate();
@@ -14,12 +15,7 @@ function App() {
         <div className='nav-bar-item' onClick={() => navigate("/lists")}>
           <h1>ITvitae ToDoList</h1>
         </div>
-        <div className='nav-bar-item' onClick={() => navigate("/login")}>
-          <h1>Login</h1>
-        </div>
-        <div className='nav-bar-item' onClick={() => navigate("/register")}>
-          <h1>Register</h1>
-        </div>
+        {getAuthToolbarElement()}
       </div>
 
       <Routes>
@@ -31,6 +27,29 @@ function App() {
       </Routes>
     </>
   )
+
+  function getAuthToolbarElement() {
+    console.log(UserService.isLoggedIn());
+    const element = UserService.isLoggedIn()
+      ?
+      <div className='nav-bar-item' onClick={onLogout}>
+        <h1>Logout</h1>
+      </div>
+      : <>
+        <div className='nav-bar-item' onClick={() => navigate("/login")}>
+          <h1>Login</h1>
+        </div>
+        <div className='nav-bar-item' onClick={() => navigate("/register")}>
+          <h1>Register</h1>
+        </div>
+      </>;
+
+    return element;
+  }
+  function onLogout() {
+    UserService.logout();
+    navigate('/login');
+  }
 }
 
 export default App;
