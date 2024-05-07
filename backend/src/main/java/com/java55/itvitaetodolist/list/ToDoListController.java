@@ -21,10 +21,10 @@ public class ToDoListController {
     private final ToDoListService toDoListService;
 
     @GetMapping
-    public List<ToDoList> getAll(Authentication authentication){
+    public List<ToDoListDto> getAll(Authentication authentication){
         var user = (User) authentication.getPrincipal();
 
-        return toDoListService.findByUsername(user.getUsername()).stream().toList();
+        return toDoListService.findByUsername(user.getUsername()).stream().map(ToDoListDto::from).toList();
     }
 
     @GetMapping("/{id}")
@@ -44,9 +44,9 @@ public class ToDoListController {
         }
         var user = newList.user();
         if(user == null) {
-            throw new BadRequestException("a new list needs a user");
+            throw new BadRequestException("A new list needs a user");
         }
-        var newToDoList = new ToDoList(text);
+        var newToDoList = new ToDoList(text, user);
         toDoListService.save(newToDoList);
 
         URI location = ucb.path("/lists/{id}").buildAndExpand(newToDoList.getId()).toUri();

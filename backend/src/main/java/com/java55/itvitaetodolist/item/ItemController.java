@@ -22,6 +22,7 @@ public class ItemController {
 
     @PostMapping
     public ResponseEntity<Item> addItem(@RequestBody PostItemDto postItemDto, UriComponentsBuilder ucb) {
+        if (postItemDto.listId() == null) throw new BadRequestException("ListId is required!");
         Optional<ToDoList> possiblyExistingList = toDoListRepository.findById(postItemDto.listId());
         if (possiblyExistingList.isEmpty()) {
             throw new NotFoundException();
