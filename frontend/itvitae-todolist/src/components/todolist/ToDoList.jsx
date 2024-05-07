@@ -7,7 +7,7 @@ import Task from './task/Task';
 import Title from './title/Title';
 import TodoForm from './todoform/ToDoForm';
 
-export default function Boodschappenlijstje({}) {
+export default function ToDoList({ }) {
     const { id } = useParams();
     const [todos, setTodos] = useState([]);
     const sortedTodos = todos.slice().sort((a, b) => Number(a.order) - Number(b.order));
