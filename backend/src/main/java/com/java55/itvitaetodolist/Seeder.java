@@ -29,9 +29,6 @@ public class Seeder implements CommandLineRunner {
                 userService.loadUserByUsername("test") :
                 userService.save("test", "test");
 
-        System.out.println(jwtService.generateTokenForUser("test"));
-
-
         if (toDoListService.findByUsername("test").isEmpty()){
             ToDoList list1 = new ToDoList("Test", testUser);
             list1 = toDoListService.save(list1);
