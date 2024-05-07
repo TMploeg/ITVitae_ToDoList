@@ -1,3 +1,5 @@
+import "./auth_styles.css";
+
 export default function AuthForm({ title, username, onUsernameChanged, password, onPasswordChanged, onSubmit }) {
     const usernameInvalid = getUsernameErrors().length > 0;
     const passwordInvalid = getPasswordErrors().length > 0;
@@ -13,7 +15,7 @@ export default function AuthForm({ title, username, onUsernameChanged, password,
                 <input value={password} onChange={event => onPasswordChanged(event.target.value)} />
                 {passwordInvalid ? <div>password is invalid</div> : null}
             </div>
-            <button onClick={onSubmit} disabled={usernameInvalid || passwordInvalid}>Submit</button>
+            <button type="button" onClick={onSubmit} disabled={usernameInvalid || passwordInvalid}>Submit</button>
         </form>
     </div>
 

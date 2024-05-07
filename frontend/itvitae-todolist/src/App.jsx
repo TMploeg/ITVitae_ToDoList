@@ -1,6 +1,8 @@
-import './App.css'
+import './App.css';
 
-import { Routes, Route, Navigate, useNavigate, useParams } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
   const navigate = useNavigate();
@@ -21,8 +23,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Navigate to="/lists" />} />
-        <Route path="/login" element={<p>Login</p>} />
-        <Route path="/register" element={<p>Register</p>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/lists" element={<p>Lists</p>} />
         <Route path="/lists/:id" element={<p>List</p>} />
       </Routes>

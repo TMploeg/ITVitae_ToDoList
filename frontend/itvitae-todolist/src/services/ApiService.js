@@ -1,6 +1,7 @@
 const API_URL = 'http://localhost:8080/';
 const REQUEST_COMPLETED_STATE = 4;
-const TOKEN_STORAGE_LOCATION = 'JWT';
+
+export const TOKEN_STORAGE_LOCATION = 'JWT';
 
 export default class ApiService {
 
@@ -46,7 +47,7 @@ export default class ApiService {
                 if (this.#isRequestSuccesfull(request)) {
                     onSucces({
                         status: request.status,
-                        body: JSON.parse(request.responseText)
+                        body: JSON.parse(request.responseText.length > 0 ? request.responseText : '{}')
                     });
                 }
                 else {
