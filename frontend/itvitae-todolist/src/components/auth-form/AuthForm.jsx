@@ -26,6 +26,7 @@ export default function AuthForm({ title, username, onUsernameChanged, password,
             <div className="form-field">
                 <input
                     value={password}
+                    type="password"
                     onChange={event => onPasswordChanged(event.target.value)}
                     onFocus={() => passwordFocusedChanged(true)}
                     onBlur={() => passwordFocusedChanged(false)} />
