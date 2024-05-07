@@ -4,8 +4,8 @@ import './Title.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ApiService from "../../../services/ApiService";
 
-export default function Title({ listID }) {
-    const [editedText, setEditedText] = useState("");
+export default function Title({ title, listID }) {
+    const [editedText, setEditedText] = useState(title);
     const [isEditing, setIsEditing] = useState(false);
 
     function handleEdit() {

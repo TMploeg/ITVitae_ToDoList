@@ -17,9 +17,10 @@ import java.util.Set;
 @Setter
 public class ToDoList {
 
-    public ToDoList(String name){
+    public ToDoList(String name, User creator){
         this.name = name;
         created = LocalDateTime.now();
+        users = Set.of(creator);
     }
 
     @Id

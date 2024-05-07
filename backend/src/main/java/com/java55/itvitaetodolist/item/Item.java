@@ -3,11 +3,13 @@ package com.java55.itvitaetodolist.item;
 import com.java55.itvitaetodolist.list.ToDoList;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Where;
 
 @Entity
 @NoArgsConstructor
 @Getter
 @Setter
+@Where(clause = "enabled = true")
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

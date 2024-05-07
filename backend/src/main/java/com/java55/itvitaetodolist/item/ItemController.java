@@ -15,12 +15,14 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/items")
+@CrossOrigin(origins = "${itvitae-todolist.cors}")
 public class ItemController {
     private final ItemRepository itemRepository;
     private final ToDoListRepository toDoListRepository;
 
     @PostMapping
     public ResponseEntity<Item> addItem(@RequestBody PostItemDto postItemDto, UriComponentsBuilder ucb) {
+        if (postItemDto.listId() == null) throw new BadRequestException("ListId is required!");
         Optional<ToDoList> possiblyExistingList = toDoListRepository.findById(postItemDto.listId());
         if (possiblyExistingList.isEmpty()) {
             throw new NotFoundException();
@@ -48,7 +50,7 @@ public class ItemController {
         Item item = possiblyExistingItem.get();
 
         if (patchItemDto.completed() != null) {
-            item.setCompleted(true);
+            item.setCompleted(patchItemDto.completed());
         }
         if (patchItemDto.order() != null) {
             item.setOrder(patchItemDto.order());
@@ -69,6 +71,7 @@ public class ItemController {
         }
         Item item = optionalItem.get();
         item.setEnabled(false);
+        itemRepository.save(item);
         return ResponseEntity.noContent().build();
     }
 }
