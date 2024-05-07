@@ -5,10 +5,10 @@ import {faPlus} from '@fortawesome/free-solid-svg-icons';
 import ApiService from "../../../services/ApiService";
 
 export default function ToDoForm({ todos, setTodos, listID }) {
-    const [todo, setTodo] = useState({name: "", done: false, order: todos.length, id: 0});
+    const [todo, setTodo] = useState({name: ""});
     
     function handleInputChange(event) {
-        setTodo({ name: event.target.value, done: false });
+        setTodo({...todo, name: event.target.value });
     }
 
     function handleAdd() {
@@ -16,7 +16,7 @@ export default function ToDoForm({ todos, setTodos, listID }) {
             return;
         }
 
-        ApiService.post("items", todo).then((todo) => {setTodos([...todos, todo])});
+        ApiService.post("items", {listId: listID, text: todo.name, order: todos.length}).then((response) => {setTodos([...todos, responseToItem(response.body)])});
         // empties input 
         setTodo({name: "", done: false, order: todos.length});
     }
@@ -40,4 +40,13 @@ export default function ToDoForm({ todos, setTodos, listID }) {
     )
 }
 
+
+function responseToItem(entity){
+    return {
+        id: entity.id,
+        name: entity.text,
+        done: entity.completed,
+        order: entity.order
+    };
+}
 
