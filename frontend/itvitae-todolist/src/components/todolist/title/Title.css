@@ -1,0 +1,48 @@
+.edit-title {
+    width: 350px;
+    height: 30px;
+    font-size: 20px;
+    padding: 5px 8px;
+    margin-bottom: 14px;
+    background-color: white;
+    border: solid #c8c8c8 2px;
+    border-radius: 5px;
+    color: black;
+}
+
+.edit-title:focus {
+    outline: none;
+}
+
+h1 {
+    color: white;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 30px;
+    max-width: 340px;
+    align-self: flex-start;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+    cursor: text;
+    overflow: hidden; 
+}
+
+.edit-icon {
+    margin-left: 10px;
+    margin-bottom: 20px;
+    visibility: hidden; 
+    color: white;
+}
+
+
+.title-container:hover .edit-icon {
+    visibility: visible; 
+}
+

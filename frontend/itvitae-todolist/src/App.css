@@ -6,7 +6,7 @@
 
 .toolbar {
   width: 100%;
-  background-color: darkcyan;
+  background-color: #05a8bf;
   display: flex;
   padding: 10px;
 }
@@ -19,4 +19,14 @@
 
 .nav-bar-item:not(:first-child){
   border-left: 2px solid rgb(77, 77, 77);
+}
+
+
+body {
+  background-color: white;
+}
+
+.todo-container {
+  display: flex;
+  justify-content: center;
 }

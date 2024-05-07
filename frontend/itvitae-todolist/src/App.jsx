@@ -1,6 +1,7 @@
-import './App.css';
-
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import './App.css';
+import ToDoList from './components/todolist/ToDoList';
+import Lists from './pages/Lists';
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
@@ -25,11 +26,11 @@ function App() {
         <Route path="/" element={<Navigate to="/lists" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/lists" element={<p>Lists</p>} />
-        <Route path="/lists/:id" element={<p>List</p>} />
+        <Route path="/lists" element={<Lists />} />
+        <Route path="/lists/:id" element={<div className='todo-container'><ToDoList /></div>} />
       </Routes>
     </>
   )
 }
 
-export default App
+export default App;
