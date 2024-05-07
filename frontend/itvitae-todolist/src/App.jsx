@@ -1,7 +1,9 @@
-import './App.css'
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import './App.css';
 import ToDoList from './components/todolist/ToDoList';
 import Lists from './pages/Lists';
-import { Routes, Route, Navigate, useNavigate, useParams } from "react-router-dom";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
   const navigate = useNavigate();
@@ -22,8 +24,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Navigate to="/lists" />} />
-        <Route path="/login" element={<p>Login</p>} />
-        <Route path="/register" element={<p>Register</p>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/lists" element={<Lists />} />
         <Route path="/lists/:id" element={<div className='todo-container'><ToDoList /></div>} />
       </Routes>

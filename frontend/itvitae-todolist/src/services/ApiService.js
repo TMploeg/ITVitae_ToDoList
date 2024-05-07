@@ -1,6 +1,7 @@
 const API_URL = 'http://localhost:8080/';
 const REQUEST_COMPLETED_STATE = 4;
-const TOKEN_STORAGE_LOCATION = 'JWT';
+
+export const TOKEN_STORAGE_LOCATION = 'JWT';
 
 export default class ApiService {
 

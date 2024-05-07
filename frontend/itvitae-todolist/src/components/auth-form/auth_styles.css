@@ -1,0 +1,23 @@
+.form-container{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.form-title{
+    color: black;
+}
+
+.auth-form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-field-error{
+    margin-top: 5px;
+    color: red;
+}
+
+.form-button{
+    width: fit-content;
+}
