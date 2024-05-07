@@ -59,10 +59,18 @@ export default class ApiService {
                     onSucces(response);
                 }
                 else {
-                    onFailed({
-                        status: request.status,
-                        message: JSON.parse(request.responseText).detail
-                    });
+                    const response = {
+                        status: request.status
+                    };
+
+                    if (request.responseText.length > 0) {
+                        try {
+                            const error = JSON.parse(request.responseText);
+                            response.message = error;
+                        }
+                        catch { }
+                    }
+                    onFailed(response);
                 }
             }
 
