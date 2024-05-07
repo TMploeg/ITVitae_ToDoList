@@ -10,6 +10,7 @@ import TodoForm from './todoform/ToDoForm';
 export default function ToDoList({ }) {
     const { id } = useParams();
     const [todos, setTodos] = useState([]);
+    const [title, setTitle] = useState("To Do");
     const sortedTodos = todos.slice().sort((a, b) => Number(a.order) - Number(b.order));
 
     function handleReorder(newTodos) {
@@ -24,6 +25,9 @@ export default function ToDoList({ }) {
     useEffect(() => {
         ApiService.get("lists/" + id).then((response) => {
             console.log('RESPONSE', response);
+            if (response.body.name !== null) {
+                setTitle(response.body.name);
+            }
             let newTodos = response.body.items.map((todo) => {
                 return {
                     id: todo.id,
@@ -36,9 +40,10 @@ export default function ToDoList({ }) {
         })
     }, []);
 
+
     return (
         <div className="todo-list">
-            <Title />
+            <Title title={title} />
             <TodoForm todos={todos} setTodos={setTodos} listID={id} />
 
             <Reorder.Group axis="y" values={sortedTodos} onReorder={handleReorder}>
