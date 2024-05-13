@@ -12,7 +12,7 @@ export default function ToDoForm({ todos, setTodos, listID }) {
     }
 
     function handleAdd() {
-        if (todo.name.length <= 0) {
+        if (todo.name.length <= 0 || todo.name.trim().length <= 0) {
             return;
         }
 

@@ -8,7 +8,9 @@
   width: 100%;
   background-color: #05a8bf;
   display: flex;
-  padding: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .nav-bar-item {
@@ -31,7 +33,8 @@ body {
   justify-content: center;
 }
 
-h1 {
+.toolbar h1 {
   color: white;
-  margin-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
 }

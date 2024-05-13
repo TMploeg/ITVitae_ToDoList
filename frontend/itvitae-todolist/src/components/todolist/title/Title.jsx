@@ -28,6 +28,7 @@ export default function Title({ title, listID, setTitle }) {
                     type="text"
                     value={title}
                     onChange={handleInputChange}
+                    onClick={(e) => {e.stopPropagation();}}
                     onBlur={handleSave}
                     onKeyDown={e => e.key === `Enter`? handleSave() : ''}
                     spellCheck="false"

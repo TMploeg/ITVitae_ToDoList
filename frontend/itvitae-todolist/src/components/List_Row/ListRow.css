@@ -2,7 +2,7 @@
     height: auto;
     min-height: 30px;
     width: 80%;
-    min-width: 50px;
+    
     border-radius: 5px;
     background-color: #05a8bf;
     text-align: center;
@@ -15,36 +15,11 @@
 }
 
 .row .title-container {
-    display: flex;
-    width: 100%;
-    align-items: space-between;
     overflow: hidden; 
     background-color: red;
 }
 
-.row .title-container h1 {
-    width: 80%;
-}
-
 .row .list-title {
-    max-width: 340px;
-    align-self: center;
-    flex: 1;
-}
-
-
-.row .edit-title:focus {
-    outline: none;
-}
-
-.row .list-title {
-    cursor: pointer;
-}
-
-.row .edit-icon {
-    margin-left: 10px;
-    margin-bottom: 20px;
-    color: white;
     cursor: pointer;
 }
 
