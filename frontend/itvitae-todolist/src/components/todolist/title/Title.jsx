@@ -35,7 +35,7 @@ export default function Title({ title, listID, setTitle }) {
                     />
                 ) : (
                     <span className="title-container">
-                        <h1>{title}</h1>
+                        <h1 className="list-title">{title}</h1>
                         <FontAwesomeIcon icon={faPen} className="edit-icon" onClick={(e) => {e.stopPropagation(); handleEdit();}} />
                     </span>
                     )}

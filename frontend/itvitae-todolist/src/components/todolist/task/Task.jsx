@@ -73,7 +73,7 @@ export default function Task({ todo, todos, setTodos, listID }) {
                         />
                     ) : (
                       // if task is done, strikethrough text
-                    <span className={todo.done ? 'completed item-name' : 'item-name'} onClick={handleEdit}>
+                    <span className={todo.done ? 'completed' : 'item-name'} onClick={handleEdit}>
                         {todo.name}
                     </span>
                 )}

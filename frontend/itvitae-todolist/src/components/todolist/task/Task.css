@@ -12,11 +12,17 @@
     color: black;
     border-radius: 5px;
     cursor: pointer;
+
 }
 
 .checkbox-and-text {
     display: flex;
     align-items: center;
+    
+    max-width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .delete-button {

@@ -18,7 +18,7 @@
 }
 
 .nav-bar-item:not(:first-child){
-  border-left: 2px solid rgb(77, 77, 77);
+  border-left: 2px solid white;
 }
 
 
@@ -29,4 +29,9 @@ body {
 .todo-container {
   display: flex;
   justify-content: center;
+}
+
+h1 {
+  color: white;
+  margin-bottom: 10px;
 }

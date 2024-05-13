@@ -21,7 +21,7 @@ export default function List_Row({ownList}){
     return (
         <div className="row" onClick={ (event) => gotoList(event, ownList.id)}>
             <Title title={text} listID={ownList.id} setTitle={setText}/>
-            <p>created on: {created.toISOString()}</p>
+            <p>created on: {created.toLocaleDateString()}</p>
         </div>
     );
 }
