@@ -50,7 +50,7 @@ export default function Lists() {
                     <FontAwesomeIcon icon={faPlus} />
                 </button>
             </div>
-            {lists.map((list) => <List_Row key={list.id} ownList={list} />)}
+            {lists.map((list) => <List_Row key={list.id} ownList={list} updateLists={createLists}/>)}
         </div>
     );
 }
