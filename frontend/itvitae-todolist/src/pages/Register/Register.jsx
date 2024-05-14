@@ -24,7 +24,7 @@ export default function Register() {
         UserService.register(username, password).then(
             registerResult => {
                 if (!registerResult.succes) {
-                    alert(registerResult.message);
+                    alert(registerResult.message.detail);
                     return;
                 }
 

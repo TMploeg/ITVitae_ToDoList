@@ -24,7 +24,8 @@ export default function Login() {
         UserService.login(username, password).then(
             result => {
                 if (!result.succes) {
-                    alert(result.message);
+                    console.log(result);
+                    alert(result.message.detail);
                     return;
                 }
 
