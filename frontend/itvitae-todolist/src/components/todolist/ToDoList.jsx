@@ -10,7 +10,7 @@ import TodoForm from './todoform/ToDoForm';
 export default function ToDoList() {
     const { id } = useParams();
     const [todos, setTodos] = useState([]);
-    const [title, setTitle] = useState("To Do");
+    const [title, setTitle] = useState("");
     const sortedTodos = todos.slice().sort((a, b) => Number(a.order) - Number(b.order));
 
     function handleReorder(newTodos) {
