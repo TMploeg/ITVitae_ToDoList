@@ -25,6 +25,7 @@ export default function ToDoForm({ todos, setTodos, listID }) {
             <div className="bar">
                 <input 
                     onChange={handleInputChange} 
+                    onKeyDown={e => e.key === `Enter`? handleAdd() : ''}
                     value={todo.name} type="text" 
                     placeholder="Add a task" 
                     className="text-input" 

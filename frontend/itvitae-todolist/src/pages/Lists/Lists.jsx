@@ -40,6 +40,7 @@ export default function Lists() {
             <div className="lists-bar">
                 <input
                     onChange={handleInputChange}
+                    onKeyDown={e => e.key === `Enter`? addList() : ''}
                     value={listTitle} type="text"
                     placeholder="Enter the title of your new to do list"
                     className="lists-text-input"
