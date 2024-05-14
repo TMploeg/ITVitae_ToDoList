@@ -6,7 +6,7 @@ import ApiService from "../../services/ApiService";
 import Title from "../todolist/title/Title";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faSquareXmark} from '@fortawesome/free-solid-svg-icons';
+import { faSquareXmark } from '@fortawesome/free-solid-svg-icons';
 
 import React from "react";
 
@@ -25,14 +25,14 @@ export default function List_Row({ ownList, updateLists }) {
 
     return (
         <div className="row-container" onClick={() => gotoList(ownList.id)}>
-        <div className="row" >
-            <Title title={text} listID={ownList.id} setTitle={setText} />
-            <button onClick={(e) => {e.stopPropagation(); handleDelete(ownList.id)}}  className="delete-button">
-                <FontAwesomeIcon icon={faSquareXmark} />
-            </button>
-            
-        </div>
-        <p>created on: {created.toLocaleDateString()}</p>
+            <div className="row" >
+                <Title title={text} listID={ownList.id} setTitle={setText} />
+                <button onClick={(e) => { e.stopPropagation(); handleDelete(ownList.id) }} className="delete-button">
+                    <FontAwesomeIcon icon={faSquareXmark} />
+                </button>
+
+            </div>
+            <p>created on: {created.toLocaleDateString()}</p>
         </div>
     );
 }
