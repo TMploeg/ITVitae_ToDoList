@@ -1,0 +1,86 @@
+:root{
+    --field-padding: 10px;
+    --field-default-color: #729fbb;
+    --field-active-color: #1c36ff;
+    --field-error-color: #ff0000;
+    --field-error-font-size: 16px;
+    
+    --transition-duration: 120ms;
+}
+
+.input-container{
+    position: relative;
+    border-radius: 10px;
+}
+.field-input{
+    padding: var(--field-padding);
+    
+    font-family: inherit;
+    font-size: inherit;
+
+    background-color: transparent;
+    outline: none;
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--field-default-color);
+    border-radius: inherit;
+
+    transition: border-color var(--transition-duration);
+}
+
+.field-label{
+    background-color: var(--default-bg-color);
+    border-radius: 50%;
+
+    position: absolute;
+    top: var(--field-padding);
+    left: calc(var(--field-padding) * 1.2);
+    padding-left: 3px;
+    padding-right: 3px;
+
+    font-family: inherit;
+    font-size: inherit;
+    
+    pointer-events: none;
+
+    color: var(--field-default-color);
+
+    transition: top var(--transition-duration),
+        font var(--transition-duration) ease-out,
+        color var(--transition-duration); 
+}
+
+.input-container.active .field-input{border-color: var(--field-active-color);}
+.input-container.active .field-label {color: var(--field-active-color);}
+
+.input-container.error .field-input{border-color: var(--field-error-color);}
+.input-container.error .field-label {color: var(--field-error-color);}
+
+.field-label.shifted{
+    top: -0.6em;
+    font-size: 0.6em;
+}
+
+.buttons-container{
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    padding-right: 10px;
+
+    display: flex;
+    align-items: center;
+}
+
+.field-error{
+    font-size: var(--field-error-font-size);
+    color: var(--field-error-color);
+    height: 1em;
+    opacity: 0;
+
+    transition: opacity 100ms;
+}
+.field-error.visible{
+    opacity: 1;
+}

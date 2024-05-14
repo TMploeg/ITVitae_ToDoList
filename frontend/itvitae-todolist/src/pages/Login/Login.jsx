@@ -13,8 +13,10 @@ export default function Login() {
             title="Login"
             username={username}
             onUsernameChanged={setUsername}
+            validateUsername={validateUsername}
             password={password}
             onPasswordChanged={setPassword}
+            validatePassword={validatePassword}
             onSubmit={submit} />
     </div>
 
@@ -29,5 +31,21 @@ export default function Login() {
                 navigate('/')
             }
         );
+    }
+
+    function validateUsername(username) {
+        if (username === undefined || username === null || username.length === 0) {
+            return ['username is required'];
+        }
+
+        return [];
+    }
+
+    function validatePassword(password) {
+        if (password === undefined || password === null || password.length === 0) {
+            return ['password is required'];
+        }
+
+        return [];
     }
 }
