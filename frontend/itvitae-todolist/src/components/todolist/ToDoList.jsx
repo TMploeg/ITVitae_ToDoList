@@ -6,11 +6,14 @@ import './ToDoList.css';
 import Task from './task/Task';
 import Title from './title/Title';
 import TodoForm from './todoform/ToDoForm';
+import UsersList from "../userslist";
 
 export default function ToDoList() {
     const { id } = useParams();
     const [todos, setTodos] = useState([]);
     const [title, setTitle] = useState("To Do");
+    const [users, setUsers] = useState([]);
+
     const sortedTodos = todos.slice().sort((a, b) => Number(a.order) - Number(b.order));
 
     function handleReorder(newTodos) {
@@ -24,6 +27,7 @@ export default function ToDoList() {
 
     useEffect(() => {
         ApiService.get("lists/" + id).then((response) => {
+            console.log(response.body);
             if (response.body.name !== null) {
                 setTitle(response.body.name);
             }
@@ -34,13 +38,23 @@ export default function ToDoList() {
                     done: todo.completed,
                     order: todo.order
                 }
-            })
+            });
+            let newUsers = response.body.users.map((user) => {
+                return {
+                    id: user.id,
+                    username: user.username
+                }
+            });
+            console.log(newUsers);
+
+            setUsers(newUsers);
             setTodos(newTodos);
         })
     }, []);
 
 
     return (
+        <>
         <div className="todo-list">
             <Title title={title} listID={id} setTitle={setTitle} />
             <TodoForm todos={todos} setTodos={setTodos} listID={id} />
@@ -53,5 +67,7 @@ export default function ToDoList() {
                 ))}
             </Reorder.Group>
         </div>
+        <UsersList users= {users} setUsers={setUsers} listid={id}/>
+        </>
     );
 }

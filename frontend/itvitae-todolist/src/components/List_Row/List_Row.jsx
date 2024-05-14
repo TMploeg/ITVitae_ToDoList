@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import React from "react";
 
-export default function List_Row({ownList}){
+export default function List_Row({ownList, updateLists}){
     const navigate = useNavigate();
     const [text, setText] = useState(ownList.name);
     let created = new Date(ownList.created);
@@ -20,7 +20,7 @@ export default function List_Row({ownList}){
 
     return (
         <div className="row" onClick={ (event) => gotoList(event, ownList.id)}>
-            <Title title={text} listID={ownList.id} setTitle={setText}/>
+            <Title className="row-title" title={text} listID={ownList.id} setTitle={setText}/>
             <p>created on: {created.toISOString()}</p>
         </div>
     );

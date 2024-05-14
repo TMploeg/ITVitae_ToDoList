@@ -3,6 +3,7 @@ package com.java55.itvitaetodolist.list;
 import com.java55.itvitaetodolist.exceptions.BadRequestException;
 import com.java55.itvitaetodolist.exceptions.NotFoundException;
 import com.java55.itvitaetodolist.users.User;
+import com.java55.itvitaetodolist.users.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -73,13 +74,18 @@ public class ToDoListController {
         return ResponseEntity.ok(ToDoListDto.from(originalToDoList));
     }
 
-    @PostMapping("{id}/{username}")
-    public ResponseEntity<ToDoListDto> addUser(@PathVariable Long id, @PathVariable String username){
+    @PostMapping("{id}")
+    public ResponseEntity<ToDoListDto> addUser(@PathVariable Long id, @RequestBody UserDto newUser){
         var possibleList = toDoListService.findById(id);
         if(possibleList.isEmpty()){
             throw new NotFoundException();
         }
         var list = possibleList.get();
+
+        if(newUser.username() == null || newUser.username().isBlank()){
+            throw new BadRequestException("username can't be empty");
+        }
+        var username = newUser.username();
 
         toDoListService.addUser(list, username);
 
@@ -97,5 +103,18 @@ public class ToDoListController {
         toDoListService.removeUser(list, username);
 
         return ResponseEntity.ok(ToDoListDto.from(list));
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteList(@PathVariable long id){
+        var possibleList = toDoListService.findById(id);
+        if(possibleList.isEmpty()){
+            throw new NotFoundException();
+        }
+        var listToDelete = possibleList.get();
+        listToDelete.setEnabled(false);
+        toDoListService.save(listToDelete);
+
+        return ResponseEntity.noContent().build();
     }
 }
