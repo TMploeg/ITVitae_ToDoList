@@ -11,6 +11,8 @@
 .input-container{
     position: relative;
     border-radius: 10px;
+
+    width: fit-content;
 }
 .field-input{
     padding: var(--field-padding);

@@ -26,7 +26,8 @@ export default function AuthForm({ title, username, onUsernameChanged, validateU
                     value={password}
                     onValueChanged={onPasswordChanged}
                     onFocus={() => passwordFocusedChanged(true)}
-                    onBlur={() => passwordFocusedChanged(false)} />
+                    onBlur={() => passwordFocusedChanged(false)}
+                    toggleVisiblity />
             </div>
             <FlatButton onClick={onSubmit} disabled={!valid}>Submit</FlatButton>
         </form>
