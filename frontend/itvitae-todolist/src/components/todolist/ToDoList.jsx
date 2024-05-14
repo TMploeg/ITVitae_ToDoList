@@ -1,6 +1,7 @@
 import { Reorder } from "framer-motion";
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import ApiService from "../../services/ApiService";
 import './ToDoList.css';
 import Task from './task/Task';
@@ -14,6 +15,7 @@ export default function ToDoList() {
 
     const [title, setTitle] = useState("");
     const [users, setUsers] = useState([]);
+    const navigate = useNavigate();
 
     const sortedTodos = todos.slice().sort((a, b) => Number(a.order) - Number(b.order));
 
@@ -50,7 +52,7 @@ export default function ToDoList() {
 
             setUsers(newUsers);
             setTodos(newTodos);
-        })
+        }, error => navigate("/lists"))
     }, []);
 
 

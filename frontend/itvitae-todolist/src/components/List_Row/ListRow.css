@@ -24,10 +24,18 @@
 .row .list-title {
     cursor: pointer;
     margin: 0;
+    padding-left: 5px;
+}
+
+.row .edit-title {
+    width: 100%;
+    height: 24px;
+    margin-bottom: 0;
 }
 
 .row button {
     color: white;
+    padding-right: 5px;
 }
 
 .row .edit-icon {
@@ -36,4 +44,6 @@
 
 .row-container p {
     margin-top: 10px;
+    padding-left: 5px;
+    padding-bottom: 5px;
 }
