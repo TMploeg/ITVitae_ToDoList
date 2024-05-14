@@ -37,6 +37,7 @@ public class ToDoListService {
             throw new BadRequestException("user already present");
         }
         list.addUser(user);
+        toDoListRepository.save(list);
     }
 
     public void removeUser(ToDoList list, String username){
@@ -45,6 +46,7 @@ public class ToDoListService {
             throw new BadRequestException("user not present");
         }
         list.removeUser(user);
+        toDoListRepository.save(list);
     }
 
     public Set<ToDoList> findByUsername(String username){
