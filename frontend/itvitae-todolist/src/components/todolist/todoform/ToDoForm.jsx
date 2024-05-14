@@ -22,7 +22,6 @@ export default function ToDoForm({ todos, setTodos, listID }) {
     }
 
     return (
-        <>
             <div className="bar">
                 <input 
                     onChange={handleInputChange} 
@@ -37,7 +36,6 @@ export default function ToDoForm({ todos, setTodos, listID }) {
                     <FontAwesomeIcon icon={faPlus} />
                 </button>
             </div>
-        </>
     )
 }
 
