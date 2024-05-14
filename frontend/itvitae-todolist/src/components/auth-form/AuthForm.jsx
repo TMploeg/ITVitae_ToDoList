@@ -1,3 +1,4 @@
+import FlatButton from "../reusable/flat-button";
 import InputField from "../reusable/input-field";
 import "./auth_styles.css";
 
@@ -27,7 +28,7 @@ export default function AuthForm({ title, username, onUsernameChanged, validateU
                     onFocus={() => passwordFocusedChanged(true)}
                     onBlur={() => passwordFocusedChanged(false)} />
             </div>
-            <button className="form-button" type="button" onClick={onSubmit} disabled={!valid}>Submit</button>
+            <FlatButton onClick={onSubmit} disabled={!valid}>Submit</FlatButton>
         </form>
     </div>
 }
