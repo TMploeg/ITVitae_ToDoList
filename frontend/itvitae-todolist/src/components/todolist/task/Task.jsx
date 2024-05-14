@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './Task.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faSquareXmark} from '@fortawesome/free-solid-svg-icons';
+import { faSquareXmark } from '@fortawesome/free-solid-svg-icons';
 import ApiService from "../../../services/ApiService";
 
 export default function Task({ todo, todos, setTodos, listID }) {
@@ -20,14 +20,14 @@ export default function Task({ todo, todos, setTodos, listID }) {
     }
 
     function handleCheckOff(id) {
-        const newArray = todos.map((todo) => { 
+        const newArray = todos.map((todo) => {
             if (todo.id !== id) return todo;
-            
+
             let checked = !todo.done;
 
-            ApiService.patch("items/" + todo.id, {completed: checked});
+            ApiService.patch("items/" + todo.id, { completed: checked });
 
-            return {...todo,done: checked};
+            return { ...todo, done: checked };
         });
         setTodos(newArray);
     }
@@ -59,27 +59,25 @@ export default function Task({ todo, todos, setTodos, listID }) {
                 <span>
                     <input type="checkbox" className="check-off-box" checked={todo.done} onChange={() => handleCheckOff(todo.id)} />
                 </span>
-                <span>
-                    {isEditing ? (
-                        <input
-                            className="edit-input" 
-                            type="text"
-                            value={editedText}
-                            onChange={handleInputChange}
-                            onBlur={handleSave}
-                            onKeyDown={e => e.key === `Enter`? handleSave() : ''}
-                            spellCheck="false"
-                            autoFocus 
-                        />
-                    ) : (
-                      // if task is done, strikethrough text
-                    <span className={todo.done ? 'completed item-name' : 'item-name'} onClick={handleEdit}>
+                {isEditing ? (
+                    <input
+                        className="edit-input"
+                        type="text"
+                        value={editedText}
+                        onChange={handleInputChange}
+                        onBlur={handleSave}
+                        onKeyDown={e => e.key === `Enter` ? handleSave() : ''}
+                        spellCheck="false"
+                        autoFocus
+                    />
+                ) : (
+                    // if task is done, strikethrough text
+                    <span className={todo.done ? 'completed' : 'item-name'} onClick={handleEdit}>
                         {todo.name}
                     </span>
                 )}
-                </span>
             </div>
-            
+
             <span>
                 <button onClick={() => handleDelete(todo)} className="delete-button">
                     <FontAwesomeIcon icon={faSquareXmark} />

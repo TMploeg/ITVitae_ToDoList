@@ -98,4 +98,17 @@ public class ToDoListController {
 
         return ResponseEntity.ok(ToDoListDto.from(list));
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteList(@PathVariable long id){
+        var possibleList = toDoListService.findById(id);
+        if(possibleList.isEmpty()){
+            throw new NotFoundException();
+        }
+        var listToDelete = possibleList.get();
+        listToDelete.setEnabled(false);
+        toDoListService.save(listToDelete);
+
+        return ResponseEntity.noContent().build();
+    }
 }

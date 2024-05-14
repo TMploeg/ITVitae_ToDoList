@@ -43,7 +43,7 @@ function App() {
         UserService.isLoggedIn()
           ? <>
             <Route path="/" element={<Navigate to="/lists" />} />
-            <Route path="/lists" element={<Lists />} />
+            <Route path="/lists" element={<div className="todo-container"><Lists /></div>} />
             <Route path="/lists/:id" element={<div className='todo-container'><ToDoList /></div>} />
           </>
           : <>

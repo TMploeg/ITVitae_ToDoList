@@ -6,22 +6,33 @@ import ApiService from "../../services/ApiService";
 import Title from "../todolist/title/Title";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
+import {faSquareXmark} from '@fortawesome/free-solid-svg-icons';
+
 import React from "react";
 
-export default function List_Row({ownList}){
+export default function List_Row({ ownList, updateLists }) {
     const navigate = useNavigate();
     const [text, setText] = useState(ownList.name);
     let created = new Date(ownList.created);
 
-    function gotoList(event, listId){
+    function gotoList(listId) {
         navigate("/lists/" + listId);
     }
 
+    function handleDelete(listId) {
+        ApiService.delete("lists/" + listId).then(() => updateLists());
+    }
+
     return (
-        <div className="row" onClick={ (event) => gotoList(event, ownList.id)}>
-            <Title title={text} listID={ownList.id} setTitle={setText}/>
-            <p>created on: {created.toISOString()}</p>
+        <div className="row-container" onClick={() => gotoList(ownList.id)}>
+        <div className="row" >
+            <Title title={text} listID={ownList.id} setTitle={setText} />
+            <button onClick={(e) => {e.stopPropagation(); handleDelete(ownList.id)}}  className="delete-button">
+                <FontAwesomeIcon icon={faSquareXmark} />
+            </button>
+            
+        </div>
+        <p>created on: {created.toLocaleDateString()}</p>
         </div>
     );
 }
