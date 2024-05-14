@@ -48,8 +48,4 @@ export default function InputField({ label, value, onValueChanged, errors, toggl
         setFocused(false);
         setTouched(true);
     }
-
-    function showErrors() {
-        alert([`${label} is invalid`, ...(errors.map(e => `- ${e}`))].join('\n'));
-    }
 }
