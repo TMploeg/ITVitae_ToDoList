@@ -1,28 +1,41 @@
-.row{
-    height: auto;
-    min-height: 30px;
-    width: 80%;
-    
+.row-container {
     border-radius: 5px;
     background-color: #05a8bf;
-    text-align: center;
     color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 0;
+    padding: 10px;
     cursor: pointer;
+    width: 80%;
+    max-width: 80%;
 }
 
+.row {
+    height: auto;
+    min-height: 30px;
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+
 .row .title-container {
-    overflow: hidden; 
-    background-color: red;
+    width: 100%;
 }
 
 .row .list-title {
     cursor: pointer;
+    margin: 0;
 }
 
 .row button {
     color: white;
+}
+
+.row .edit-icon {
+    margin-bottom: 0;
+}
+
+.row-container p {
+    margin-top: 10px;
 }

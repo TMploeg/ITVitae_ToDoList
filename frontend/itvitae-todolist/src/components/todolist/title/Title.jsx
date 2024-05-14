@@ -21,7 +21,7 @@ export default function Title({ title, listID, setTitle }) {
     }
 
     return (
-        <span>
+        <>
             {isEditing ? (
                 <input
                     className="edit-title" 
@@ -40,6 +40,6 @@ export default function Title({ title, listID, setTitle }) {
                         <FontAwesomeIcon icon={faPen} className="edit-icon" onClick={(e) => {e.stopPropagation(); handleEdit();}} />
                     </span>
                     )}
-        </span>
+        </>
     );
 }

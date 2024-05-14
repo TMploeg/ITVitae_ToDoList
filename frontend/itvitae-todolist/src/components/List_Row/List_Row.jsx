@@ -24,12 +24,15 @@ export default function List_Row({ ownList, updateLists }) {
     }
 
     return (
-        <div className="row" onClick={() => gotoList(ownList.id)}>
+        <div className="row-container" onClick={() => gotoList(ownList.id)}>
+        <div className="row" >
             <Title title={text} listID={ownList.id} setTitle={setText} />
             <button onClick={(e) => {e.stopPropagation(); handleDelete(ownList.id)}}  className="delete-button">
                 <FontAwesomeIcon icon={faSquareXmark} />
             </button>
-            <p>created on: {created.toLocaleDateString()}</p>
+            
+        </div>
+        <p>created on: {created.toLocaleDateString()}</p>
         </div>
     );
 }
