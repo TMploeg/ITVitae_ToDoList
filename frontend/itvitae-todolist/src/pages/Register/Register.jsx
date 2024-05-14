@@ -13,17 +13,18 @@ export default function Register() {
             title="Register"
             username={username}
             onUsernameChanged={setUsername}
+            validateUsername={validateUsername}
             password={password}
             onPasswordChanged={setPassword}
-            onSubmit={submit}
-            validatePassword />
+            validatePassword={validatePassword}
+            onSubmit={submit} />
     </div>
 
     function submit() {
         UserService.register(username, password).then(
             registerResult => {
                 if (!registerResult.succes) {
-                    alert(registerResult.message);
+                    alert(registerResult.message.detail);
                     return;
                 }
 
@@ -32,5 +33,46 @@ export default function Register() {
                 );
             }
         );
+    }
+
+    function validateUsername(username) {
+        if (username === undefined || username === null || username.length === 0) {
+            return ['username is required'];
+        }
+
+        return [];
+    }
+
+    function validatePassword(password) {
+        if (password === undefined || password === null || password.length === 0) {
+            return ['password is required'];
+        }
+
+        const errors = [];
+
+        const passwordMinLength = 7;
+        const specialCharacters = '!@#$%&*()_+=|<>?{}\\[\\]~-';
+
+        if (!regEx(password, '[a-z]')) {
+            errors.push('must have lowercase letter');
+        }
+        if (!regEx(password, '[A-Z]')) {
+            errors.push('must have uppercase letter');
+        }
+        if (!regEx(password, '[0-9]')) {
+            errors.push('must have digit');
+        }
+        if (!regEx(password, `[${specialCharacters}]`)) {
+            errors.push('must have special character');
+        }
+        if (password.length < passwordMinLength) {
+            errors.push(`must have at least ${passwordMinLength} characters`);
+        }
+
+        return errors;
+    }
+
+    function regEx(text, pattern) {
+        return text.search(pattern) >= 0;
     }
 }

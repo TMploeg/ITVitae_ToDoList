@@ -1,0 +1,63 @@
+:root{
+    --flat-button-default-color: #05a8bf;
+    --flat-button-active-color: #11bbd1;
+
+    --flat-button-border-color: #05a8bf;
+    --flat-button-border-radius: 1em;
+
+    --flat-button-disabled-color: #5d5d5d;
+}
+
+.flat-button{
+    width: fit-content;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--flat-button-border-color);
+    border-radius: var(--flat-button-border-radius);
+
+    background-color: transparent;
+    
+    font-size: 30px;
+    color: var(--flat-button-default-color);
+
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 12px;
+    padding-right: 12px;
+
+    position: relative;
+    cursor: pointer;
+}
+.flat-button:active:not(:disabled){
+    color: var(--flat-button-active-color);
+    border-color: var(--flat-button-active-color);
+}
+.flat-button:disabled{
+    cursor:default;
+    color: var(--flat-button-disabled-color);
+    border-color: var(--flat-button-disabled-color);
+}
+
+.flat-button-background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--flat-button-default-color);
+    border-radius: var(--flat-button-border-radius);
+    opacity: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flat-button:hover:not(:disabled) .flat-button-background{
+    opacity: 0.1;
+}
+.flat-button:active:not(:disabled) .flat-button-background{
+    background-color: var(--flat-button-active-color);
+    opacity: 0.15
+}

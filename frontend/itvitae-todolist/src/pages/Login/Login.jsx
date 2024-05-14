@@ -13,8 +13,10 @@ export default function Login() {
             title="Login"
             username={username}
             onUsernameChanged={setUsername}
+            validateUsername={validateUsername}
             password={password}
             onPasswordChanged={setPassword}
+            validatePassword={validatePassword}
             onSubmit={submit} />
     </div>
 
@@ -22,12 +24,29 @@ export default function Login() {
         UserService.login(username, password).then(
             result => {
                 if (!result.succes) {
-                    alert(result.message);
+                    console.log(result);
+                    alert(result.message.detail);
                     return;
                 }
 
                 navigate('/')
             }
         );
+    }
+
+    function validateUsername(username) {
+        if (username === undefined || username === null || username.length === 0) {
+            return ['username is required'];
+        }
+
+        return [];
+    }
+
+    function validatePassword(password) {
+        if (password === undefined || password === null || password.length === 0) {
+            return ['password is required'];
+        }
+
+        return [];
     }
 }

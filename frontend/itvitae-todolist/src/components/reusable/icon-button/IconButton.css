@@ -1,0 +1,26 @@
+:root{
+    --icon-button-img-size: 30px;
+}
+
+.icon-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    aspect-ratio: 1 / 1;
+    width: calc(var(--icon-button-img-size) * 1.7);
+    border: none;
+    border-radius: 50%;
+
+    background-color: transparent;
+}
+.icon-button:hover, .icon-button:active{
+    background-color: #40404040;
+}
+
+.icon-button-img{
+    width: var(--icon-button-img-size);
+}
+.icon-button:active .icon-button-img{
+    width: calc(var(--icon-button-img-size) * 0.9);
+}
