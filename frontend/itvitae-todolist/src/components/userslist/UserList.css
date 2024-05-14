@@ -1,6 +1,7 @@
 .users-list {
     display: flex;
     width: 15%;
+    min-width: 150px;
     flex-direction: column;
     background-color: #c8c8c8;
     padding: 20px 20px 0 20px;
@@ -70,7 +71,6 @@
     background-color: white;
     color: black;
     border-radius: 5px;
-    cursor: pointer;
 }
 
 .users-delete-button{
@@ -78,4 +78,19 @@
     border: none;
     color: #ff6c00; 
     font-size: 20px;
+}
+
+@media only screen and (max-width: 800px) {
+    .users-list {
+        width: 60%;
+        margin-left: 0;
+    }
+
+    .users-add {
+        width: 100%;
+    }
+
+    .user-row {
+        width: calc(100% - 20px);
+    }
 }

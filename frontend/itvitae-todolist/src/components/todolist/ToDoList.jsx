@@ -54,20 +54,20 @@ export default function ToDoList() {
 
 
     return (
-        <>
-        <div className="todo-list">
-            <Title title={title} listID={id} setTitle={setTitle} />
-            <TodoForm todos={todos} setTodos={setTodos} listID={id} />
+        <div className="todo-page">
+            <div className="todo-list">
+                <Title title={title} listID={id} setTitle={setTitle} />
+                <TodoForm todos={todos} setTodos={setTodos} listID={id} />
 
-            <Reorder.Group axis="y" values={sortedTodos} onReorder={handleReorder}>
-                {sortedTodos.map(todo => (
-                    <Reorder.Item key={todo.id} value={todo}>
-                        <Task todo={todo} todos={todos} setTodos={setTodos} listID={id} />
-                    </Reorder.Item>
-                ))}
-            </Reorder.Group>
+                <Reorder.Group axis="y" values={sortedTodos} onReorder={handleReorder}>
+                    {sortedTodos.map(todo => (
+                        <Reorder.Item key={todo.id} value={todo}>
+                            <Task todo={todo} todos={todos} setTodos={setTodos} listID={id} />
+                        </Reorder.Item>
+                    ))}
+                </Reorder.Group>
+            </div>
+            <UsersList users= {users} setUsers={setUsers} listid={id}/>
         </div>
-        <UsersList users= {users} setUsers={setUsers} listid={id}/>
-        </>
     );
 }
