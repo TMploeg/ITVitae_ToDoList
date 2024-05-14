@@ -1,5 +1,6 @@
 package com.java55.itvitaetodolist.list;
 
+import com.java55.itvitaetodolist.exceptions.BadRequestException;
 import com.java55.itvitaetodolist.users.User;
 import com.java55.itvitaetodolist.users.UserRepository;
 import com.java55.itvitaetodolist.users.UserService;
@@ -33,7 +34,7 @@ public class ToDoListService {
     public void addUser(ToDoList list, String username) {
         var user = userService.loadUserByUsername(username);
         if(list.hasUser(user)){
-            throw new RuntimeException("user already present");
+            throw new BadRequestException("user already present");
         }
         list.addUser(user);
     }
@@ -41,7 +42,7 @@ public class ToDoListService {
     public void removeUser(ToDoList list, String username){
         var user = userService.loadUserByUsername(username);
         if(!list.hasUser(user)){
-            throw new RuntimeException("user not present");
+            throw new BadRequestException("user not present");
         }
         list.removeUser(user);
     }

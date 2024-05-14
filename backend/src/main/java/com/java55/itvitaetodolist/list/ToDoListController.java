@@ -28,12 +28,18 @@ public class ToDoListController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ToDoListDto> get(@PathVariable long id){
+    public ResponseEntity<ToDoListDto> get(@PathVariable long id, Authentication authentication){
         var possibleList = toDoListService.findById(id);
         if(possibleList.isEmpty()){
             throw new NotFoundException();
         }
-        return ResponseEntity.ok(ToDoListDto.from(possibleList.get()));
+        var foundList = possibleList.get();
+        var currentUser = (User) authentication.getPrincipal();
+
+        if(!foundList.hasUser(currentUser)){
+            throw new NotFoundException();
+        }
+        return ResponseEntity.ok(ToDoListDto.from(foundList));
     }
 
     @PostMapping
