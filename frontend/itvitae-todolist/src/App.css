@@ -8,7 +8,9 @@
   width: 100%;
   background-color: #05a8bf;
   display: flex;
-  padding: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .nav-bar-item {
@@ -18,7 +20,7 @@
 }
 
 .nav-bar-item:not(:first-child){
-  border-left: 2px solid rgb(77, 77, 77);
+  border-left: 2px solid white;
 }
 
 
@@ -29,4 +31,10 @@ body {
 .todo-container {
   display: flex;
   justify-content: center;
+}
+
+.toolbar h1 {
+  color: white;
+  padding-left: 15px;
+  padding-right: 15px;
 }
