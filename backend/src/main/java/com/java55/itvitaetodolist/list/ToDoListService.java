@@ -5,6 +5,7 @@ import com.java55.itvitaetodolist.users.User;
 import com.java55.itvitaetodolist.users.UserRepository;
 import com.java55.itvitaetodolist.users.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class ToDoListService {
 
     public void addUser(ToDoList list, String username) {
         var user = userService.loadUserByUsername(username);
+
         if(list.hasUser(user)){
             throw new BadRequestException("user already present");
         }
@@ -41,9 +43,14 @@ public class ToDoListService {
     }
 
     public void removeUser(ToDoList list, String username){
+        if(!userService.userExists(username)) {
+            throw new BadRequestException("user doesn't exist");
+        }
+
         var user = userService.loadUserByUsername(username);
-        if(!list.hasUser(user)){
-            throw new BadRequestException("user not present");
+
+        if (!list.hasUser(user)) {
+            throw new BadRequestException("user not present in list");
         }
         list.removeUser(user);
         toDoListRepository.save(list);

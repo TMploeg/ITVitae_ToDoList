@@ -34,8 +34,8 @@ public class ToDoListController {
         if(possibleList.isEmpty()){
             throw new NotFoundException();
         }
+        User currentUser = (User) authentication.getPrincipal();
         var foundList = possibleList.get();
-        var currentUser = (User) authentication.getPrincipal();
 
         if(!foundList.hasUser(currentUser)){
             throw new NotFoundException();
@@ -59,7 +59,7 @@ public class ToDoListController {
     }
 
     @PatchMapping("{id}")
-    public ResponseEntity<?> update(@RequestBody ToDoListPatchDto toDoListPatchDto, @PathVariable Long id){
+    public ResponseEntity<?> update(@RequestBody ToDoListPatchDto toDoListPatchDto, @PathVariable Long id, Authentication authentication){
         var idFromBody = toDoListPatchDto.id();
         if(idFromBody != null){
             throw new BadRequestException("PATCH should not have id in body");
@@ -71,6 +71,12 @@ public class ToDoListController {
         }
         var originalToDoList = possibleOriginal.get();
 
+        var currentUser = (User) authentication.getPrincipal();
+
+        if(!originalToDoList.hasUser(currentUser)){
+            throw new NotFoundException();
+        }
+
         if(toDoListPatchDto.name() != null){
             originalToDoList.setName(toDoListPatchDto.name());
         }
@@ -81,12 +87,17 @@ public class ToDoListController {
     }
 
     @PostMapping("{id}")
-    public ResponseEntity<ToDoListDto> addUser(@PathVariable Long id, @RequestBody UserDto newUser){
+    public ResponseEntity<ToDoListDto> addUser(@PathVariable Long id, @RequestBody UserDto newUser, Authentication authentication){
         var possibleList = toDoListService.findById(id);
         if(possibleList.isEmpty()){
             throw new NotFoundException();
         }
         var list = possibleList.get();
+        var currentUser = (User) authentication.getPrincipal();
+
+        if(!list.hasUser(currentUser)){
+            throw new NotFoundException();
+        }
 
         if(newUser.username() == null || newUser.username().isBlank()){
             throw new BadRequestException("username can't be empty");
@@ -98,29 +109,42 @@ public class ToDoListController {
         return ResponseEntity.ok(ToDoListDto.from(list));
     }
 
-    @DeleteMapping("{id}/{username}")
-    public ResponseEntity<ToDoListDto> removeUser(@PathVariable Long id, @PathVariable String username){
+    @DeleteMapping("{id}")
+    public ResponseEntity<ToDoListDto> removeUser(@PathVariable Long id, @RequestBody UserDto user, Authentication authentication){
         var possibleList = toDoListService.findById(id);
         if(possibleList.isEmpty()){
             throw new NotFoundException();
         }
         var list = possibleList.get();
 
-        toDoListService.removeUser(list, username);
+        var currentUser = (User) authentication.getPrincipal();
+
+        if(!list.hasUser(currentUser)){
+            throw new NotFoundException();
+        }
+
+        toDoListService.removeUser(list, user.username());
 
         return ResponseEntity.ok(ToDoListDto.from(list));
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteList(@PathVariable long id){
+    public ResponseEntity<Void> deleteList(@PathVariable long id, Authentication authentication){
         var possibleList = toDoListService.findById(id);
         if(possibleList.isEmpty()){
             throw new NotFoundException();
         }
         var listToDelete = possibleList.get();
+
+        var currentUser = (User) authentication.getPrincipal();
+
+        if(!listToDelete.hasUser(currentUser)){
+            throw new NotFoundException();
+        }
         listToDelete.setEnabled(false);
         toDoListService.save(listToDelete);
 
         return ResponseEntity.noContent().build();
     }
+
 }
