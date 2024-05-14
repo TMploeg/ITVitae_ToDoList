@@ -10,7 +10,7 @@
 }
 
 .users-add {
-    width: 100%;
+    width: calc(90% + 20px);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -61,7 +61,7 @@
     align-items: center;
     justify-content: space-between;
     font-size: medium;
-    width: 93%;
+    width: 90%;
     margin-bottom: 10px;
     margin-top: 10px;
     height: 30px;
