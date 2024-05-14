@@ -4,6 +4,8 @@
 
     --flat-button-border-color: #05a8bf;
     --flat-button-border-radius: 1em;
+
+    --flat-button-disabled-color: #5d5d5d;
 }
 
 .flat-button{
@@ -32,8 +34,8 @@
 }
 .flat-button:disabled{
     cursor:default;
-    color: gray;
-    border-color: gray;
+    color: var(--flat-button-disabled-color);
+    border-color: var(--flat-button-disabled-color);
 }
 
 .flat-button-background{
