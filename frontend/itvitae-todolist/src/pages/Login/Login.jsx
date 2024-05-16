@@ -16,7 +16,8 @@ export default function Login() {
             password={password}
             onPasswordChanged={setPassword}
             validatePassword={validatePassword}
-            onSubmit={submit} />
+            onSubmit={submit}
+            submitText="Login" />
 
     function submit() {
         UserService.login(username, password).then(

@@ -16,7 +16,8 @@ export default function Register() {
             password={password}
             onPasswordChanged={setPassword}
             validatePassword={validatePassword}
-            onSubmit={submit} />
+            onSubmit={submit} 
+            submitText="Register" />
 
     function submit() {
         UserService.register(username, password).then(
