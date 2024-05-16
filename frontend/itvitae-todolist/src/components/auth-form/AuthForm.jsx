@@ -2,7 +2,7 @@ import FlatButton from "../reusable/flat-button";
 import InputField from "../reusable/input-field";
 import "./auth_styles.css";
 
-export default function AuthForm({ title, username, onUsernameChanged, validateUsername, password, onPasswordChanged, validatePassword, onSubmit }) {
+export default function AuthForm({ title, username, onUsernameChanged, validateUsername, password, onPasswordChanged, validatePassword, onSubmit, submitText }) {
     const usernameErrors = validateUsername ? validateUsername(username) : [];
     const passwordErrors = validatePassword ? validatePassword(password) : [];
     const valid = usernameErrors.length === 0 && passwordErrors.length === 0;
@@ -29,7 +29,7 @@ export default function AuthForm({ title, username, onUsernameChanged, validateU
                     onBlur={() => passwordFocusedChanged(false)}
                     toggleVisiblity />
             </div>
-            <FlatButton onClick={onSubmit} disabled={!valid}>Submit</FlatButton>
+            <FlatButton onClick={onSubmit} disabled={!valid}>{submitText ?? "Submit"}</FlatButton>
         </form>
     </div>
 }
