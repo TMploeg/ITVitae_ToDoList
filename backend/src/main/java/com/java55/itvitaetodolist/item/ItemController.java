@@ -34,7 +34,7 @@ public class ItemController {
         }
         ToDoList list = possiblyExistingList.get();
 
-        if (!list.getUsers().contains(user)) {
+        if (!list.hasUser(user)) {
             throw new ForbiddenException();
         }
 
@@ -60,7 +60,7 @@ public class ItemController {
         }
         Item item = possiblyExistingItem.get();
 
-        if (!item.getList().getUsers().contains(user)) {
+        if (!item.getList().hasUser(user)) {
             throw new ForbiddenException();
         }
 
@@ -87,9 +87,10 @@ public class ItemController {
             return ResponseEntity.notFound().build();
         }
         Item item = optionalItem.get();
-        if (!item.getList().getUsers().contains(user)) {
+        if (!item.getList().hasUser(user)) {
             throw new ForbiddenException();
         }
+        
         item.setEnabled(false);
         itemRepository.save(item);
         return ResponseEntity.noContent().build();
