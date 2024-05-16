@@ -15,7 +15,6 @@ export default function Lists() {
     function createLists() {
         ApiService.get("lists").then(response => {
             let arrayFromBody = response.body;
-            console.log(arrayFromBody);
             arrayFromBody.sort((a, b) => (a.created > b.created));
             setLists(arrayFromBody);
         });
