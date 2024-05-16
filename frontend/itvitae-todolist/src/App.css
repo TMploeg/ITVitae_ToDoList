@@ -8,13 +8,18 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.toolbar {
-  width: 100%;
-  background-color: #05a8bf;
+.toolbar-container {
   display: flex;
+  flex-direction: column;
+  background-color: #05a8bf;
   padding-top: 15px;
   padding-bottom: 15px;
   margin-bottom: 20px;
+}
+
+.toolbar {
+  width: fit-content;
+  display: flex;
 }
 
 .nav-bar-item {
@@ -41,4 +46,25 @@ body {
   color: white;
   padding-left: 15px;
   padding-right: 15px;
+}
+
+@media (max-width: 700px) {
+  .toolbar-container {
+    align-items: center;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-bar-item {
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-bar-item:not(:first-child) {
+    border-left: none;
+    border-top: 2px solid white;
+  }
 }

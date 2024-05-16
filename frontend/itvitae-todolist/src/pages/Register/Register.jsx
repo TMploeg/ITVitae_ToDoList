@@ -8,8 +8,7 @@ export default function Register() {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    return <div className="form-container">
-        <AuthForm
+    return <AuthForm
             title="Register"
             username={username}
             onUsernameChanged={setUsername}
@@ -18,7 +17,6 @@ export default function Register() {
             onPasswordChanged={setPassword}
             validatePassword={validatePassword}
             onSubmit={submit} />
-    </div>
 
     function submit() {
         UserService.register(username, password).then(

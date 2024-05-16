@@ -11,11 +11,13 @@ function App() {
 
   return (
     <>
-      <div className='toolbar'>
-        <div className='nav-bar-item' onClick={() => navigate("/lists")}>
-          <h1>ITvitae ToDoList</h1>
+      <div className='toolbar-container'>
+        <div className='toolbar'>
+          <div className='nav-bar-item' onClick={() => navigate("/lists")}>
+            <h1>ITvitae ToDoList</h1>
+          </div>
+          {getAuthToolbarElement()}
         </div>
-        {getAuthToolbarElement()}
       </div>
       {getRoutes()}
     </>

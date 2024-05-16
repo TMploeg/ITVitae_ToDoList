@@ -1,6 +1,9 @@
 .form-container{
-    margin-top: 20px;
-    margin-left: 20px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
 }
 
 .form-title{
@@ -11,6 +14,7 @@
 .auth-form{
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
 }
 
