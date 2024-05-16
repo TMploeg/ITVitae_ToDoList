@@ -30,7 +30,6 @@ export default function ToDoList() {
 
     useEffect(() => {
         ApiService.get("lists/" + id).then((response) => {
-            console.log(response.body);
             if (response.body.name !== null) {
                 setTitle(response.body.name);
             }
@@ -48,7 +47,6 @@ export default function ToDoList() {
                     username: user.username
                 }
             });
-            console.log(newUsers);
 
             setUsers(newUsers);
             setTodos(newTodos);
