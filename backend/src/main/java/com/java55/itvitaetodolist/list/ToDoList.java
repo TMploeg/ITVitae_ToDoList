@@ -42,7 +42,12 @@ public class ToDoList {
     private boolean enabled = true;
 
     public boolean hasUser(User user){
-        return users.contains(user);
+        for(User current: users){
+            if(current.equals(user)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void addUser(User user){

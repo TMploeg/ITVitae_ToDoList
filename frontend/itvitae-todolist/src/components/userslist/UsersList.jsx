@@ -17,31 +17,33 @@ export default function UsersList({ users, setUsers, listid }){
     }, [users]);
 
     function handleAdd(){
-        ApiService.post("lists/" + listid, {username: newUsername}).then((response) => {
-            setNewUsername("");
-            let newUsers = response.body.users.map((user) => {
-                return {
-                    id: user.id,
-                    username: user.username
-                }
-            });
-            console.log(newUsers);
-
-            setUsers(newUsers);
-        });
+        ApiService.post("lists/" + listid + "/users", {username: newUsername}).then(
+            (response) => {
+                setNewUsername("");
+                let newUsers = response.body.users.map((user) => {
+                    return {
+                        id: user.id,
+                        username: user.username
+                    }}
+                );
+                setUsers(newUsers);
+            },
+            error => alert(error.message.detail)
+        );
     }
     function handleRemove(removedUser){
-        ApiService.delete("lists/" + listid + "/" + removedUser).then((response) => {
-            let newUsers = response.body.users.map((user) => {
-                return {
-                    id: user.id,
-                    username: user.username
-                }
-            });
-            console.log(newUsers);
-
-            setUsers(newUsers);
-        });
+        ApiService.delete("lists/" + listid + "/users", removedUser).then(
+            (response) => {
+                let newUsers = response.body.users.map((user) => {
+                    return {
+                        id: user.id,
+                        username: user.username
+                    }
+                });
+                setUsers(newUsers);
+            },
+            error => alert(error.message.detail)
+        );
     }
 
     function handleInputChange(event){
