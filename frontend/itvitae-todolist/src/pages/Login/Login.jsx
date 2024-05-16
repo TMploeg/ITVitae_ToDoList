@@ -8,8 +8,7 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    return <div className="form-container">
-        <AuthForm
+    return <AuthForm
             title="Login"
             username={username}
             onUsernameChanged={setUsername}
@@ -18,7 +17,6 @@ export default function Login() {
             onPasswordChanged={setPassword}
             validatePassword={validatePassword}
             onSubmit={submit} />
-    </div>
 
     function submit() {
         UserService.login(username, password).then(
