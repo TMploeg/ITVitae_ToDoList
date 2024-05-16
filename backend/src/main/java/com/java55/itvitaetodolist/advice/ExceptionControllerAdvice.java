@@ -1,8 +1,10 @@
 package com.java55.itvitaetodolist.advice;
 
 import com.java55.itvitaetodolist.exceptions.BadRequestException;
+import com.java55.itvitaetodolist.exceptions.ForbiddenException;
 import com.java55.itvitaetodolist.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,5 +21,10 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<Void> notFoundHandler() {
         return ResponseEntity.notFound().build();
+    }
+
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<Void> forbiddenHandler() {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 }
