@@ -1,5 +1,7 @@
 import ApiService, { TOKEN_STORAGE_LOCATION } from "./ApiService";
 
+const USERNAME_STORAGE_LOCATION = 'USERNAME';
+
 export default class UserService {
     static login(username, password) {
         return ApiService
@@ -13,6 +15,7 @@ export default class UserService {
             .then(
                 response => {
                     sessionStorage.setItem(TOKEN_STORAGE_LOCATION, response.body.token);
+                    sessionStorage.setItem(USERNAME_STORAGE_LOCATION, response.body.username);
                     return Promise.resolve({
                         succes: true
                     });
@@ -54,5 +57,9 @@ export default class UserService {
 
     static isLoggedIn() {
         return sessionStorage.getItem(TOKEN_STORAGE_LOCATION) !== null;
+    }
+
+    static getUsername() {
+        return sessionStorage.getItem(USERNAME_STORAGE_LOCATION);
     }
 }

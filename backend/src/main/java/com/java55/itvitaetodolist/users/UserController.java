@@ -41,7 +41,10 @@ public class UserController {
         }
 
         return ResponseEntity.ok(
-            new TokenDTO(jwtService.generateTokenForUser(authDTO.username()))
+            new TokenDTO(
+                    jwtService.generateTokenForUser(authDTO.username()),
+                    authDTO.username()
+            )
         );
     }
 
