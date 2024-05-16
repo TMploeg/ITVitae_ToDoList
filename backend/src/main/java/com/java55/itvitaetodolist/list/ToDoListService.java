@@ -33,6 +33,9 @@ public class ToDoListService {
     }
 
     public void addUser(ToDoList list, String username) {
+        if(!userService.userExists(username)) {
+            throw new BadRequestException("user doesn't exist");
+        }
         var user = userService.loadUserByUsername(username);
 
         if(list.hasUser(user)){

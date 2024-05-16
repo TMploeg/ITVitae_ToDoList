@@ -86,7 +86,7 @@ public class ToDoListController {
         return ResponseEntity.ok(ToDoListDto.from(originalToDoList));
     }
 
-    @PostMapping("{id}")
+    @PostMapping("{id}/users")
     public ResponseEntity<ToDoListDto> addUser(@PathVariable Long id, @RequestBody UserDto newUser, Authentication authentication){
         var possibleList = toDoListService.findById(id);
         if(possibleList.isEmpty()){
@@ -109,8 +109,8 @@ public class ToDoListController {
         return ResponseEntity.ok(ToDoListDto.from(list));
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<ToDoListDto> removeUser(@PathVariable Long id, @RequestBody UserDto user, Authentication authentication){
+    @DeleteMapping("{id}/users/{username}")
+    public ResponseEntity<ToDoListDto> removeUser(@PathVariable Long id, @PathVariable String username, Authentication authentication){
         var possibleList = toDoListService.findById(id);
         if(possibleList.isEmpty()){
             throw new NotFoundException();
@@ -123,7 +123,7 @@ public class ToDoListController {
             throw new NotFoundException();
         }
 
-        toDoListService.removeUser(list, user.username());
+        toDoListService.removeUser(list, username);
 
         return ResponseEntity.ok(ToDoListDto.from(list));
     }
