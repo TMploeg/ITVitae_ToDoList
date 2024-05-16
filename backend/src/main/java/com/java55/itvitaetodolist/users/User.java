@@ -60,6 +60,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean equals(Object object){
-        return ( (object instanceof User) && ((User) object).id.equals(this.id));
+        return object instanceof User other && other.id.equals(this.id);
     }
 }
