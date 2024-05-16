@@ -32,7 +32,7 @@ export default function UsersList({ users, setUsers, listid }){
         );
     }
     function handleRemove(removedUser){
-        ApiService.delete("lists/" + listid + "/users", removedUser).then(
+        ApiService.delete("lists/" + listid + "/users/" + removedUser).then(
             (response) => {
                 let newUsers = response.body.users.map((user) => {
                     return {
